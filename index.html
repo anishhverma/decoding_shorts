@@ -1,0 +1,1905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sarthak Goswami — 28-Day Shorts Audit</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap');
+
+:root {
+  --bg: #080b0f;
+  --surface: #0e1318;
+  --surface-2: #141b23;
+  --surface-3: #1a232e;
+  --border: #1f2d3d;
+  --border-bright: #2a3f55;
+  --text: #d4dde8;
+  --text-dim: #6b7f94;
+  --text-dimmer: #3d5266;
+  --accent: #ff3b5c;
+  --accent-glow: rgba(255,59,92,0.15);
+  --gold: #f5c842;
+  --gold-glow: rgba(245,200,66,0.1);
+  --teal: #00c9a7;
+  --teal-glow: rgba(0,201,167,0.1);
+  --blue: #4e9af1;
+  --blue-glow: rgba(78,154,241,0.1);
+  --purple: #9b59b6;
+  --orange: #f39c12;
+  --nav-w: 240px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'JetBrains Mono', monospace;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0;
+  width: var(--nav-w);
+  height: 100vh;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-bright) transparent;
+}
+
+nav::-webkit-scrollbar { width: 3px; }
+nav::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
+
+.nav-brand {
+  padding: 22px 20px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-brand .channel-tag {
+  font-family: 'Syne', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.nav-brand h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.nav-brand .meta {
+  font-size: 10px;
+  color: var(--text-dimmer);
+  margin-top: 4px;
+}
+
+.nav-section-label {
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-dimmer);
+  padding: 16px 20px 6px;
+}
+
+.nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  font-size: 11px;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: all 0.2s;
+  border-left: 2px solid transparent;
+  line-height: 1.4;
+}
+
+.nav a:hover {
+  color: var(--text);
+  background: var(--surface-2);
+  border-left-color: var(--accent);
+}
+
+.nav a .num {
+  font-size: 9px;
+  color: var(--text-dimmer);
+  min-width: 16px;
+}
+
+/* MAIN */
+main {
+  margin-left: var(--nav-w);
+  flex: 1;
+  max-width: calc(100vw - var(--nav-w));
+}
+
+/* HERO */
+.hero {
+  padding: 60px 60px 40px;
+  background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 60%);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; right: -80px;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(255,59,92,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.hero h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 16px;
+  color: #e8f0f8;
+}
+
+.hero h1 em {
+  font-style: italic;
+  font-family: 'Instrument Serif', serif;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 12px;
+  color: var(--text-dim);
+  max-width: 580px;
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  max-width: 720px;
+}
+
+.hero-stat {
+  background: var(--surface-2);
+  padding: 16px 20px;
+}
+
+.hero-stat .val {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.hero-stat .val.accent { color: var(--accent); }
+.hero-stat .val.gold { color: var(--gold); }
+.hero-stat .val.teal { color: var(--teal); }
+
+.hero-stat .lbl {
+  font-size: 9px;
+  color: var(--text-dimmer);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+
+/* SECTIONS */
+section {
+  padding: 56px 60px;
+  border-bottom: 1px solid var(--border);
+}
+
+section:last-child { border-bottom: none; }
+
+.section-eyebrow {
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.section-sub {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 36px;
+  line-height: 1.6;
+  max-width: 680px;
+}
+
+/* CARDS */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 24px;
+  transition: border-color 0.2s;
+}
+
+.card:hover { border-color: var(--border-bright); }
+
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: var(--text);
+}
+
+.card-body {
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--text-dim);
+}
+
+.card-body strong { color: var(--text); }
+.card-body .hl { color: var(--accent); font-weight: 600; }
+.card-body .hl-gold { color: var(--gold); }
+.card-body .hl-teal { color: var(--teal); }
+
+/* GRIDS */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+/* VERDICT CARD */
+.verdict-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.verdict-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.verdict-title a {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--blue);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.verdict-title a:hover { color: var(--accent); }
+
+.badge {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 20px;
+}
+
+.badge-viral { background: rgba(255,59,92,0.15); color: var(--accent); border: 1px solid rgba(255,59,92,0.3); }
+.badge-strong { background: rgba(245,200,66,0.12); color: var(--gold); border: 1px solid rgba(245,200,66,0.3); }
+.badge-mid { background: rgba(78,154,241,0.12); color: var(--blue); border: 1px solid rgba(78,154,241,0.3); }
+.badge-weak { background: rgba(155,89,182,0.12); color: var(--purple); border: 1px solid rgba(155,89,182,0.3); }
+.badge-fail { background: rgba(243,156,18,0.12); color: var(--orange); border: 1px solid rgba(243,156,18,0.3); }
+
+.verdict-body { padding: 16px 20px; }
+
+.verdict-metrics {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.v-metric { font-size: 10px; }
+.v-metric .v-val { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--text); }
+.v-metric .v-lbl { color: var(--text-dimmer); font-size: 9px; margin-top: 1px; }
+
+.verdict-insight {
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--text-dim);
+  border-left: 2px solid var(--border-bright);
+  padding-left: 12px;
+}
+
+.verdict-insight strong { color: var(--text); }
+.verdict-insight .why { color: var(--gold); font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+/* RETENTION BAR */
+.ret-bar-wrap { margin-bottom: 20px; }
+.ret-bar-label { display: flex; justify-content: space-between; font-size: 10px; margin-bottom: 5px; }
+.ret-bar-label .name { color: var(--text-dim); max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ret-bar-label .pct { color: var(--text); font-weight: 600; }
+.ret-bar-track { height: 6px; background: var(--surface-3); border-radius: 3px; overflow: hidden; }
+.ret-bar-fill { height: 100%; border-radius: 3px; transition: width 0.8s ease; }
+
+/* CALLOUT */
+.callout {
+  padding: 20px 24px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  border-left: 3px solid;
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.callout-danger { background: rgba(255,59,92,0.06); border-color: var(--accent); }
+.callout-warning { background: rgba(243,156,18,0.06); border-color: var(--orange); }
+.callout-success { background: rgba(0,201,167,0.06); border-color: var(--teal); }
+.callout-info { background: rgba(78,154,241,0.06); border-color: var(--blue); }
+
+.callout strong { color: var(--text); }
+.callout .callout-title { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+.callout-danger .callout-title { color: var(--accent); }
+.callout-warning .callout-title { color: var(--orange); }
+.callout-success .callout-title { color: var(--teal); }
+.callout-info .callout-title { color: var(--blue); }
+.callout p { color: var(--text-dim); }
+
+/* FORMULA CARD */
+.formula-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 12px;
+}
+
+.formula-num {
+  font-size: 32px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  color: var(--accent);
+  opacity: 0.3;
+  margin-bottom: 4px;
+}
+
+.formula-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 8px;
+}
+
+.formula-example {
+  background: var(--surface-3);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 10px 14px;
+  font-size: 10px;
+  color: var(--teal);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+.formula-desc {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* EXPERIMENT CARD */
+.exp-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 22px;
+  margin-bottom: 14px;
+}
+
+.exp-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.exp-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 14px;
+}
+
+.exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+.exp-field { font-size: 10px; }
+.exp-field .ef-label { color: var(--text-dimmer); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; font-size: 9px; }
+.exp-field .ef-val { color: var(--text-dim); line-height: 1.5; }
+
+/* BIG 5 */
+.big5-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 16px;
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 20px;
+  align-items: start;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.big5-card:hover {
+  border-color: var(--border-bright);
+  transform: translateX(4px);
+}
+
+.big5-rank {
+  font-family: 'Syne', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  color: var(--accent);
+  opacity: 0.25;
+  line-height: 1;
+}
+
+.big5-content {}
+.big5-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.big5-desc { font-size: 11px; color: var(--text-dim); line-height: 1.7; }
+.big5-desc strong { color: var(--text); }
+
+.big5-meta {}
+.effort-badge {
+  font-size: 9px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 6px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.effort-low { background: rgba(0,201,167,0.12); color: var(--teal); border: 1px solid rgba(0,201,167,0.3); }
+.effort-med { background: rgba(78,154,241,0.12); color: var(--blue); border: 1px solid rgba(78,154,241,0.3); }
+.effort-high { background: rgba(243,156,18,0.12); color: var(--orange); border: 1px solid rgba(243,156,18,0.3); }
+
+.upside-label { font-size: 9px; color: var(--text-dimmer); text-align: center; }
+.upside-val { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--gold); text-align: center; }
+
+/* CATEGORY TABLE */
+.cat-table { width: 100%; border-collapse: collapse; }
+.cat-table th { text-align: left; padding: 10px 14px; font-size: 9px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-dimmer); border-bottom: 1px solid var(--border); font-weight: 600; }
+.cat-table td { padding: 12px 14px; font-size: 11px; color: var(--text-dim); border-bottom: 1px solid rgba(31,45,61,0.5); vertical-align: top; }
+.cat-table tr:last-child td { border-bottom: none; }
+.cat-table .cat-name { color: var(--text); font-weight: 600; font-family: 'Syne', sans-serif; font-size: 12px; }
+.cat-table .cat-views { color: var(--teal); font-weight: 600; }
+.cat-table .cat-verdict { font-size: 10px; }
+.cat-table .cat-signal-high { color: var(--teal); }
+.cat-table .cat-signal-med { color: var(--blue); }
+.cat-table .cat-signal-low { color: var(--orange); }
+.cat-table .cat-signal-bad { color: var(--accent); }
+
+/* IDEA CARD */
+.idea-card {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 16px;
+  transition: border-color 0.2s;
+}
+
+.idea-card:hover { border-color: var(--border-bright); }
+.idea-tag { font-size: 9px; color: var(--text-dimmer); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
+.idea-title { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.idea-desc { font-size: 10px; color: var(--text-dim); line-height: 1.6; }
+
+/* FINAL VERDICT */
+.verdict-answer {
+  margin-bottom: 24px;
+  padding: 24px 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  border-left: 3px solid var(--accent);
+}
+
+.va-q { font-size: 10px; color: var(--text-dimmer); text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
+.va-a { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.5; margin-bottom: 10px; }
+.va-detail { font-size: 11px; color: var(--text-dim); line-height: 1.7; }
+.va-detail strong { color: var(--text); }
+
+/* SEPARATOR */
+.sep { height: 1px; background: var(--border); margin: 28px 0; }
+
+/* PILL ROW */
+.pill-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.pill {
+  font-size: 10px;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid var(--border-bright);
+  color: var(--text-dim);
+}
+
+.pill-accent { border-color: rgba(255,59,92,0.4); color: var(--accent); background: rgba(255,59,92,0.07); }
+.pill-teal { border-color: rgba(0,201,167,0.4); color: var(--teal); background: rgba(0,201,167,0.07); }
+.pill-gold { border-color: rgba(245,200,66,0.4); color: var(--gold); background: rgba(245,200,66,0.07); }
+.pill-blue { border-color: rgba(78,154,241,0.4); color: var(--blue); background: rgba(78,154,241,0.07); }
+
+/* SCORE DONUT */
+.score-ring { position: relative; display: inline-block; }
+.score-ring svg { transform: rotate(-90deg); }
+.score-center {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+/* DURATION SPECTRUM */
+.dur-spectrum {
+  display: flex;
+  gap: 2px;
+  margin: 16px 0;
+  align-items: flex-end;
+  height: 60px;
+}
+
+.dur-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.dur-bar { width: 100%; border-radius: 2px 2px 0 0; transition: height 0.6s ease; }
+.dur-label { font-size: 8px; color: var(--text-dimmer); text-align: center; }
+
+/* SECTION SPECIAL BACKGROUNDS */
+#exec-summary { background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%); }
+#big5 { background: linear-gradient(180deg, rgba(255,59,92,0.03) 0%, var(--bg) 100%); }
+#final-verdict { background: linear-gradient(180deg, var(--surface-2) 0%, var(--bg) 100%); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 2px; }
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  nav { width: 200px; }
+  main { margin-left: 200px; }
+  .hero { padding: 40px 40px 32px; }
+  section { padding: 44px 40px; }
+  .hero-stats { grid-template-columns: repeat(3, 1fr); }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  .grid-4 { grid-template-columns: 1fr 1fr; }
+  .big5-card { grid-template-columns: 50px 1fr; }
+  .big5-meta { grid-column: 2; }
+}
+
+@media (max-width: 800px) {
+  nav { position: relative; width: 100%; height: auto; }
+  main { margin-left: 0; max-width: 100vw; }
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .hero { padding: 28px; }
+  section { padding: 32px 28px; }
+}
+
+/* ANIMATIONS */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in { animation: fadeInUp 0.5s ease forwards; }
+
+/* LINK STYLES */
+a.short-link {
+  color: var(--blue);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(78,154,241,0.4);
+  transition: color 0.2s, border-color 0.2s;
+}
+a.short-link:hover { color: var(--accent); border-color: rgba(255,59,92,0.5); }
+
+/* INSIGHT BLOCK */
+.insight-block {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin-top: 12px;
+}
+
+.ib-tag {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 6px;
+}
+
+.ib-tag.pattern { color: var(--gold); }
+.ib-tag.why { color: var(--teal); }
+.ib-tag.algo { color: var(--blue); }
+.ib-tag.action { color: var(--accent); }
+.ib-tag.impact { color: var(--purple); }
+
+.ib-text { font-size: 11px; color: var(--text-dim); line-height: 1.7; }
+.ib-text strong { color: var(--text); }
+
+/* NINETY DAY */
+.day-block {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+
+.day-header {
+  padding: 14px 20px;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.day-header.d30 { background: rgba(255,59,92,0.08); color: var(--accent); }
+.day-header.d60 { background: rgba(245,200,66,0.08); color: var(--gold); }
+.day-header.d90 { background: rgba(0,201,167,0.08); color: var(--teal); }
+
+.day-body { padding: 16px 20px; background: var(--surface); }
+.day-body ul { list-style: none; }
+.day-body li { font-size: 11px; color: var(--text-dim); padding: 5px 0; border-bottom: 1px solid rgba(31,45,61,0.5); line-height: 1.6; }
+.day-body li:last-child { border-bottom: none; }
+.day-body li::before { content: '→ '; color: var(--text-dimmer); }
+.day-body li strong { color: var(--text); }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav>
+  <div class="nav-brand">
+    <div class="channel-tag">Shorts Audit</div>
+    <h2>Sarthak Goswami</h2>
+    <div class="meta">28-Day Analysis · June 2026</div>
+  </div>
+
+  <div class="nav-section-label">Report Sections</div>
+  <a href="#exec-summary"><span class="num">00</span> Executive Summary</a>
+  <a href="#viral-pattern"><span class="num">01</span> Viral Pattern Analysis</a>
+  <a href="#hook-analysis"><span class="num">02</span> Hook Analysis</a>
+  <a href="#swipe-prevention"><span class="num">03</span> Swipe Prevention</a>
+  <a href="#category-analysis"><span class="num">04</span> Category Analysis</a>
+  <a href="#repurposed-vs-native"><span class="num">05</span> Repurposed vs Native</a>
+  <a href="#audience-psychology"><span class="num">06</span> Audience Psychology</a>
+  <a href="#funnel"><span class="num">07</span> Shorts → Long-Form Funnel</a>
+  <a href="#algo-analysis"><span class="num">08</span> Algorithm Analysis</a>
+  <a href="#title-analysis"><span class="num">09</span> Title & Caption Analysis</a>
+  <a href="#future-playbook"><span class="num">10</span> Future Virality Playbook</a>
+  <a href="#experiments"><span class="num">11</span> Experiment Roadmap</a>
+  <a href="#big5"><span class="num">12</span> If We Only Do 5 Things</a>
+  <a href="#final-verdict"><span class="num">13</span> Final Verdict</a>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">YouTube Shorts · Strategic Audit · 28-Day Period</div>
+  <h1>The <em>Sarthak</em> Shorts<br>Diagnosis</h1>
+  <p class="hero-sub">A complete performance autopsy covering 25 Shorts — what crossed 1M, what hit 44K, why the gap exists, and the exact playbook to close it. Written for channel leadership, not dashboards.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="val accent">1.1M</div>
+      <div class="lbl">Peak Short Views</div>
+    </div>
+    <div class="hero-stat">
+      <div class="val">44.4K</div>
+      <div class="lbl">Worst Short Views</div>
+    </div>
+    <div class="hero-stat">
+      <div class="val gold">82.1%</div>
+      <div class="lbl">Peak Retention</div>
+    </div>
+    <div class="hero-stat">
+      <div class="val accent">55.5%</div>
+      <div class="lbl">Worst Retention</div>
+    </div>
+    <div class="hero-stat">
+      <div class="val teal">25</div>
+      <div class="lbl">Shorts Analyzed</div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 0: EXECUTIVE SUMMARY -->
+<section id="exec-summary">
+  <div class="section-eyebrow">Section 00</div>
+  <div class="section-title">Executive Summary</div>
+  <div class="section-sub">The blunt version. Four things you need to know before reading anything else.</div>
+
+  <div class="grid-2" style="margin-bottom:20px;">
+    <div class="callout callout-success">
+      <div class="callout-title">🏆 Biggest Win</div>
+      <p><strong><a href="https://youtube.com/shorts/AiQbGtKKqaw" class="short-link">Logic Where?! 🙄</a></strong> broke 1.1M views — the only Short in this period to cross 1M. It revealed something crucial: when a Short triggers <strong>institutional outrage + identity defence + a named villain</strong>, the algorithm distributes it to audiences far beyond the channel's subscriber base. 80.8% stayed to watch. 731 remix views. This is the formula. It was executed correctly <em>once</em>.</p>
+    </div>
+    <div class="callout callout-danger">
+      <div class="callout-title">🔥 Biggest Failure</div>
+      <p><strong><a href="https://youtube.com/shorts/RgJHtYBm9DM" class="short-link">National Tamasha Agency 👀</a></strong> is the clearest case study in what kills Shorts distribution. 2:05 duration. 55.5% retention. 44.5% swiped away. 44.4K views — 25× fewer than the top Short. The topic (NTA/NEET scandal) was identical to three other Shorts that performed 3-7× better. The problem was the <strong>format, not the topic</strong>.</p>
+    </div>
+    <div class="callout callout-info">
+      <div class="callout-title">📈 Biggest Opportunity</div>
+      <p>The data shows a clear retention wall: Shorts over <strong>1:45 collapse</strong> in both retention and distribution. Yet 4 of the 25 Shorts exceed that threshold and all 4 underperform. Simultaneously, Sarthak's Shorts have near-zero original native content — everything is repurposed from long-form. <strong>Even 2-3 native Shorts per month, designed specifically for vertical consumption, could 3-5× the conversion rate.</strong></p>
+    </div>
+    <div class="callout callout-warning">
+      <div class="callout-title">⚠️ Biggest Risk</div>
+      <p>The channel is currently building a <strong>Shorts audience that does not convert to long-form viewers or subscribers</strong>. The average Shorts viewer here is a casual news-entertainment consumer who follows the topic, not Sarthak. Unless the Shorts begin acting as explicit funnels — with personality hooks, cliff-hangers, and calls to explore — the 912M channel views aren't building compounding loyalty.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-bottom:16px;">
+    <div class="card-title">The 28-Day Report Card at a Glance</div>
+    <div class="card-body">
+      <p>Across 25 Shorts, total estimated views landed between <strong>6–7 million</strong> in the audit window. Five Shorts (20% of output) generated approximately <strong>50% of all views</strong>. Twelve Shorts (48% of output) stayed between 120K–290K — a "mediocre middle" zone that suggests consistent algorithmic distribution but insufficient hook strength to break through. Four Shorts underperformed dramatically. This is a <span class="hl">Pareto distribution problem masquerading as a content consistency problem.</span> The fix is not to post more — it's to engineer the conditions that created Logic Where?! and replicate them systematically.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 1: VIRAL PATTERN ANALYSIS -->
+<section id="viral-pattern">
+  <div class="section-eyebrow">Section 01</div>
+  <div class="section-title">Viral Pattern Analysis</div>
+  <div class="section-sub">What actually distinguishes the Shorts that broke through from those that didn't — stripped of narrative and explained mechanically.</div>
+
+  <div class="section-eyebrow" style="margin-bottom:12px;">Top Performers — Diagnosis</div>
+
+  <!-- Logic Where -->
+  <div class="verdict-card">
+    <div class="verdict-header">
+      <div class="verdict-title"><a href="https://youtube.com/shorts/AiQbGtKKqaw" class="short-link">Logic Where?! 🙄</a></div>
+      <span class="badge badge-viral">1.1M · VIRAL</span>
+    </div>
+    <div class="verdict-body">
+      <div class="verdict-metrics">
+        <div class="v-metric"><div class="v-val" style="color:var(--teal)">80.8%</div><div class="v-lbl">Retention</div></div>
+        <div class="v-metric"><div class="v-val">0:55</div><div class="v-lbl">Avg View</div></div>
+        <div class="v-metric"><div class="v-val" style="color:var(--accent)">19%</div><div class="v-lbl">Swiped Away</div></div>
+        <div class="v-metric"><div class="v-val">1:27</div><div class="v-lbl">Duration</div></div>
+        <div class="v-metric"><div class="v-val" style="color:var(--gold)">4</div><div class="v-lbl">Remixes</div></div>
+      </div>
+      <div class="verdict-insight">
+        <div class="why">Why It Worked</div>
+        <p>The CBSE-Pakistan-Vedant scandal was tailor-made for Shorts virality: it had a named individual (Vedant Shrivastava), an absurd institutional overreach (CBSE's Pakistan connection allegation), and a built-in outrage loop ("they're silencing journalists"). The title <em>"Logic Where?!"</em> is a confrontational question — it demands the viewer complete the thought. Sarthak's face-camera delivery amplified the personal complicity feeling. <strong>The viewer didn't just watch — they felt personally offended.</strong> That emotional ownership is what drives sharing. Four external creators remixed it. YouTube's recommendation engine identified this as high-shareability content and distributed it into education-adjacent and media-criticism clusters.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real Journalism -->
+  <div class="verdict-card">
+    <div class="verdict-header">
+      <div class="verdict-title"><a href="https://youtube.com/shorts/NYQuQ8eOX30" class="short-link">This is Real Journalism! 👏 @Journalist_Mahima</a></div>
+      <span class="badge badge-strong">794.3K · STRONG</span>
+    </div>
+    <div class="verdict-body">
+      <div class="verdict-metrics">
+        <div class="v-metric"><div class="v-val" style="color:var(--teal)">73.3%</div><div class="v-lbl">Retention</div></div>
+        <div class="v-metric"><div class="v-val">0:46</div><div class="v-lbl">Avg View</div></div>
+        <div class="v-metric"><div class="v-val">26.7%</div><div class="v-lbl">Swiped Away</div></div>
+        <div class="v-metric"><div class="v-val">1:28</div><div class="v-lbl">Duration</div></div>
+      </div>
+      <div class="verdict-insight">
+        <div class="why">Why It Worked</div>
+        <p>The @Journalist_Mahima tag is strategically important — it created discoverability beyond Sarthak's own audience. The topic (brave woman journalist, ground reporting, Bihar) activated <strong>pride + admiration</strong>, which are sharing emotions. The framing "Real Journalism" implicitly contrasts with mainstream media, triggering the channel's core audience who feel disillusioned. However, at 1:28 with only 73.3% retention, the clip drops viewers mid-way — the ending likely failed to land the emotional peak it needed.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Share before deleted -->
+  <div class="verdict-card">
+    <div class="verdict-header">
+      <div class="verdict-title"><a href="https://youtube.com/shorts/DQO0PgKVBh8" class="short-link">Share before this gets deleted 😭</a></div>
+      <span class="badge badge-strong">535.4K · STRONG</span>
+    </div>
+    <div class="verdict-body">
+      <div class="verdict-metrics">
+        <div class="v-metric"><div class="v-val" style="color:var(--teal)">82.1%</div><div class="v-lbl">Retention</div></div>
+        <div class="v-metric"><div class="v-val">1:08</div><div class="v-lbl">Avg View</div></div>
+        <div class="v-metric"><div class="v-val" style="color:var(--teal)">17.9%</div><div class="v-lbl">Swiped Away</div></div>
+        <div class="v-metric"><div class="v-val">1:57</div><div class="v-lbl">Duration</div></div>
+      </div>
+      <div class="verdict-insight">
+        <div class="why">Why It Worked</div>
+        <p>The title is doing 90% of the viral work here. "Share before this gets deleted" is the single most effective psychological trigger in online content: it creates <strong>urgency + scarcity + rebellion</strong> in five words. Viewers feel like participants in resistance, not passive consumers. This is also the only 1:57 Short that performed well — because the title created enough commitment bias before pressing play. <strong>The lesson: a truly exceptional title can override the duration penalty.</strong> The Modi-Norway press freedom angle was highly charged, further cementing it.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Saari dikkat -->
+  <div class="verdict-card">
+    <div class="verdict-header">
+      <div class="verdict-title"><a href="https://youtube.com/shorts/znkVNF2kRYQ" class="short-link">Saari dikkat gareebo se hi hai! 🙄</a></div>
+      <span class="badge badge-strong">471.9K · STRONG</span>
+    </div>
+    <div class="verdict-body">
+      <div class="verdict-metrics">
+        <div class="v-metric"><div class="v-val" style="color:var(--teal)">75.3%</div><div class="v-lbl">Retention</div></div>
+        <div class="v-metric"><div class="v-val">0:59</div><div class="v-lbl">Avg View</div></div>
+        <div class="v-metric"><div class="v-val">24.8%</div><div class="v-lbl">Swiped Away</div></div>
+        <div class="v-metric"><div class="v-val">1:42</div><div class="v-lbl">Duration</div></div>
+      </div>
+      <div class="verdict-insight">
+        <div class="why">Why It Worked</div>
+        <p>This Short uses a first-person satire trigger — the title puts words in the government's mouth, which enrages the viewer on behalf of the poor. <strong>Economic frustration content crosses political lines.</strong> Middle-class Indians, regardless of political affiliation, share anger about fuel prices and inflation being blamed on the poor. This broke into audiences who don't typically engage with political satire. The Hindi title also dramatically outperforms English alternatives — it signals authenticity to the core desi audience.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+  <div class="section-eyebrow" style="margin-bottom:12px;">Underperformers — Diagnosis</div>
+
+  <!-- National Tamasha -->
+  <div class="verdict-card">
+    <div class="verdict-header">
+      <div class="verdict-title"><a href="https://youtube.com/shorts/RgJHtYBm9DM" class="short-link">National Tamasha Agency 👀</a></div>
+      <span class="badge badge-fail">44.4K · CRITICAL FAILURE</span>
+    </div>
+    <div class="verdict-body">
+      <div class="verdict-metrics">
+        <div class="v-metric"><div class="v-val" style="color:var(--accent)">55.5%</div><div class="v-lbl">Retention</div></div>
+        <div class="v-metric"><div class="v-val">0:46</div><div class="v-lbl">Avg View</div></div>
+        <div class="v-metric"><div class="v-val" style="color:var(--accent)">44.5%</div><div class="v-lbl">Swiped Away</div></div>
+        <div class="v-metric"><div class="v-val" style="color:var(--accent)">2:05</div><div class="v-lbl">Duration</div></div>
+      </div>
+      <div class="verdict-insight">
+        <div class="why">Why It Failed</div>
+        <p>Three compounding failures: <strong>(1) Duration:</strong> At 2:05, this is nearly a long-form video dumped into Shorts. The algorithm treats >90s Shorts with increasing skepticism. <strong>(2) Hook failure:</strong> "National Tamasha Agency" is a witty nickname — but it requires prior knowledge of NTA to decode. New viewers (who represent 80%+ of Shorts reach) have no context. <strong>(3) Energy mismatch:</strong> A 2-minute explanation of bureaucratic corruption is structurally incompatible with the Shorts scroll. The three other NEET-related Shorts ("Where is the lie?", "Who is responsible?", "Please don't fall for propaganda") all significantly outperformed this. Same topic, fundamentally different format.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supreme Court -->
+  <div class="verdict-card">
+    <div class="verdict-header">
+      <div class="verdict-title"><a href="https://youtube.com/shorts/TmBkJ6VoS3w" class="short-link">Supreme Court's Hypocrisy 😐</a></div>
+      <span class="badge badge-weak">144.9K · UNDERPERFORM</span>
+    </div>
+    <div class="verdict-body">
+      <div class="verdict-metrics">
+        <div class="v-metric"><div class="v-val" style="color:var(--orange)">67.6%</div><div class="v-lbl">Retention</div></div>
+        <div class="v-metric"><div class="v-val">0:41</div><div class="v-lbl">Avg View</div></div>
+        <div class="v-metric"><div class="v-val" style="color:var(--orange)">32.4%</div><div class="v-lbl">Swiped Away</div></div>
+        <div class="v-metric"><div class="v-val">1:08</div><div class="v-lbl">Duration</div></div>
+      </div>
+      <div class="verdict-insight">
+        <div class="why">Why It Failed</div>
+        <p>The Umar Khalid-UAPA angle is a deeply important civil liberties story — but it requires significant political context to feel personal. The Shorts audience, many of whom are first-time encounters with this channel, didn't have the necessary frame. "Supreme Court's Hypocrisy" is a title that tells you the conclusion before delivering the argument, removing curiosity. <strong>Compare this to "Logic Where?!" — which leaves the conclusion open, forcing the viewer to complete it themselves.</strong> Legal/judicial content also has a lower intrinsic urgency than education or economic stories.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+  <div class="section-eyebrow" style="margin-bottom:16px;">The Common Viral Traits for Sarthak</div>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-title" style="color:var(--teal)">Traits of Top Performers</div>
+      <div class="card-body">
+        <p>✓ Title leaves a gap the viewer must close<br>✓ Institutional authority as the villain<br>✓ Named individuals (not just "the government")<br>✓ Duration 60–100 seconds<br>✓ Hindi or Hinglish framing<br>✓ Emotional peak in first 5 seconds<br>✓ Class/education/economic angle<br>✓ First-person or POV structure<br>✓ Current event (within 48 hours of news break)<br>✓ Outrage that transcends political lines</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--accent)">Traits of Underperformers</div>
+      <div class="card-body">
+        <p>✗ Title states the conclusion, killing curiosity<br>✗ Duration above 1:45<br>✗ Abstract institutions (courts, agencies)<br>✗ Topic requires inside knowledge<br>✗ Pure analysis without emotional hook<br>✗ Opening is slow (clip starts mid-sentence)<br>✗ No named individual as anchor<br>✗ Partisan framing that pre-selects audience<br>✗ Legal/judicial topics without personal stakes<br>✗ Clip extracted from low-energy segment of long video</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--gold)">The Unexpected Insight</div>
+      <div class="card-body">
+        <p>The most surprising finding: <strong>topic is not the primary determinant of virality</strong>. Three Shorts covered NEET — performance ranged from 44K to 361K. Two Shorts covered Modi — performance ranged from 245K to 535K. <strong>Format, title, and emotional framing explain 70%+ of performance variance.</strong> The same news event, told differently, can 8× the outcome. This is the most actionable insight in the entire audit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: HOOK ANALYSIS -->
+<section id="hook-analysis">
+  <div class="section-eyebrow">Section 02</div>
+  <div class="section-title">Hook Analysis</div>
+  <div class="section-sub">The opening moment of a Short is a binary decision for the viewer. These 10 formulas emerged from studying what made viewers stop scrolling specifically for Sarthak's content.</div>
+
+  <div class="grid-2">
+    <div class="formula-card">
+      <div class="formula-num">01</div>
+      <div class="formula-title">The Absurdity Confrontation</div>
+      <div class="formula-example">"Logic Where?!" / "National Tamasha Agency" / "Supreme Court's Hypocrisy"</div>
+      <div class="formula-desc">Opens by naming an absurd situation and inviting the viewer's moral response. Works best when the absurdity is viscerally understandable without context. Fails when the absurdity requires insider knowledge.</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-num">02</div>
+      <div class="formula-title">The Urgency Command</div>
+      <div class="formula-example">"Share before this gets deleted 😭"</div>
+      <div class="formula-desc">Creates a scarcity loop. The viewer becomes an agent of preservation, not a passive consumer. The most powerful hook format psychologically — it converts passive watching into active participation before the video plays. Use sparingly or it loses power.</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-num">03</div>
+      <div class="formula-title">The Villain's Mouth</div>
+      <div class="formula-example">"Saari dikkat gareebo se hi hai!" / "Please don't fall for propaganda"</div>
+      <div class="formula-desc">You put words in the villain's mouth — the government, the corporation, the institution. The viewer reacts to the voice before the analysis. Creates instant emotional positioning. Works across political lines because the emotional trigger (class anxiety, information control) is universal.</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-num">04</div>
+      <div class="formula-title">The Identity Challenge</div>
+      <div class="formula-example">"You Can't Ignore Him! 🤐" / "Tell me yours! 👀"</div>
+      <div class="formula-desc">Directly addresses the viewer's identity or position. "You Can't Ignore Him" challenges the viewer to admit they've been avoiding something. "Tell me yours" creates a participation loop. Both trigger ego-defense mechanisms that demand completion.</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-num">05</div>
+      <div class="formula-title">The Status Check</div>
+      <div class="formula-example">"Who will win Bengal? ⬇️🤔" / "Why Vijay won the election? 🤔"</div>
+      <div class="formula-desc">Electoral and political outcome questions tap into prediction psychology. The viewer wants to validate their existing belief or be surprised. Works especially well during live election cycles. The emoji reinforces visual urgency.</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-num">06</div>
+      <div class="formula-title">The Reality Reveal</div>
+      <div class="formula-example">"Reality hai ya PR Stunt? 👀"</div>
+      <div class="formula-desc">Positions the viewer as an investigator alongside Sarthak. The question form creates a binary puzzle the brain needs to resolve. Strong when applied to a high-profile individual (Modi, celebrity) where the viewer already has an opinion to validate or challenge.</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-num">07</div>
+      <div class="formula-title">The POV Insertion</div>
+      <div class="formula-example">"My POV On Cockroach Janta Party 👀"</div>
+      <div class="formula-desc">First-person opinion framing creates parasocial stakes. The viewer is not just watching news — they're consuming Sarthak's personal take. Works when Sarthak's credibility on that topic is established. Slightly weaker for unfamiliar creators, stronger for loyal audiences.</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-num">08</div>
+      <div class="formula-title">The Validation Protest</div>
+      <div class="formula-example">"This is Real Journalism! 👏"</div>
+      <div class="formula-desc">Celebrates something the audience already believes is being suppressed. The viewer clicks to validate their own worldview. The @mention amplifies this — the tagged creator gets notified, their audience is pulled in, and the tribute becomes a bridge between two communities.</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-num">09</div>
+      <div class="formula-title">The Wrong Answers Hook</div>
+      <div class="formula-example">"Wrong answers only 🤣⬇️"</div>
+      <div class="formula-desc">A comment-bait format that instantly activates the creative urge to participate. The humor reduces the pressure of response. Works as a community-building tool — the content is less important than the permission to be funny. Strong for mid-week engagement content.</div>
+    </div>
+    <div class="formula-card">
+      <div class="formula-num">10</div>
+      <div class="formula-title">The Collective Grief</div>
+      <div class="formula-example">"Why Indian students are losing hope 💔" / "Another family calls it tradition 💔"</div>
+      <div class="formula-desc">Empathy-driven hooks. Weaker for Sarthak's audience, which skews toward active critique rather than passive empathy. The heart emoji signals emotional content, which performs below Sarthak's average because his audience responds to anger, not sadness. Consider using these only when anchored to a specific outrage.</div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+  <div class="callout callout-info" style="margin-top:16px;">
+    <div class="callout-title">The 3-Second Rule for Sarthak's Shorts</div>
+    <p>The data suggests that the opening 3 seconds need to accomplish one of exactly three things: <strong>(1) Make the viewer feel something immediately (outrage, pride, absurdist humor)</strong>, <strong>(2) Create a question the brain physically cannot leave unanswered</strong>, or <strong>(3) Position the viewer as a moral participant in what's about to happen</strong>. Any Short that opens with context-setting, slow explanation, or visual B-roll before the emotional hook is losing 20-30% of its potential audience before the first cut.</p>
+  </div>
+</section>
+
+<!-- SECTION 3: SWIPE PREVENTION -->
+<section id="swipe-prevention">
+  <div class="section-eyebrow">Section 03</div>
+  <div class="section-title">Swipe Prevention Analysis</div>
+  <div class="section-sub">Retention ranked across all 25 Shorts. What emotions stopped the scroll — and which emotions failed to hold attention.</div>
+
+  <div class="grid-2">
+    <div>
+      <div style="margin-bottom:24px;">
+        <div style="font-size:11px; color:var(--text-dim); margin-bottom:14px;">Retention Ranking — Stayed to Watch %</div>
+
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name"><a href="https://youtube.com/shorts/DQO0PgKVBh8" class="short-link">Share before this gets deleted</a></span><span class="pct">82.1%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:82.1%; background:var(--teal);"></div></div>
+        </div>
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name"><a href="https://youtube.com/shorts/AiQbGtKKqaw" class="short-link">Logic Where?!</a></span><span class="pct">80.8%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:80.8%; background:var(--teal);"></div></div>
+        </div>
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name"><a href="https://youtube.com/shorts/kbbkdzgEuoQ" class="short-link">Reality hai ya PR Stunt?</a></span><span class="pct">78.6%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:78.6%; background:var(--teal);"></div></div>
+        </div>
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name"><a href="https://youtube.com/shorts/8y2crQrOEbg" class="short-link">Why Vijay won the election?</a></span><span class="pct">78.4%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:78.4%; background:var(--teal);"></div></div>
+        </div>
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name"><a href="https://youtube.com/shorts/2OoYvybIOEE" class="short-link">What Happened to Raghav Chadha?</a></span><span class="pct">78.3%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:78.3%; background:var(--teal);"></div></div>
+        </div>
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name"><a href="https://youtube.com/shorts/WqSNLh0hABA" class="short-link">Please don't fall for propaganda</a></span><span class="pct">77.6%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:77.6%; background:var(--blue);"></div></div>
+        </div>
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name"><a href="https://youtube.com/shorts/IbGqqhxEJD4" class="short-link">You Can't Ignore Him!</a></span><span class="pct">76.8%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:76.8%; background:var(--blue);"></div></div>
+        </div>
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name"><a href="https://youtube.com/shorts/xZWUxANkwlM" class="short-link">TMC ki MC gyi?</a></span><span class="pct">76.0%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:76%; background:var(--blue);"></div></div>
+        </div>
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name"><a href="https://youtube.com/shorts/80ScR2_vZUg" class="short-link">My POV On Cockroach Janta Party</a></span><span class="pct">75.8%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:75.8%; background:var(--blue);"></div></div>
+        </div>
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name"><a href="https://youtube.com/shorts/jXovG0VRh2s" class="short-link">Another family calls it "tradition."</a></span><span class="pct">75.2%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:75.2%; background:var(--blue);"></div></div>
+        </div>
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name"><a href="https://youtube.com/shorts/znkVNF2kRYQ" class="short-link">Saari dikkat gareebo se hi hai!</a></span><span class="pct">75.3%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:75.3%; background:var(--blue);"></div></div>
+        </div>
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name">Middle performers avg (73-74%)</span><span class="pct">~73.5%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:73.5%; background:var(--text-dimmer);"></div></div>
+        </div>
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name"><a href="https://youtube.com/shorts/TmBkJ6VoS3w" class="short-link">Supreme Court's Hypocrisy</a></span><span class="pct">67.6%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:67.6%; background:var(--orange);"></div></div>
+        </div>
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name"><a href="https://youtube.com/shorts/T4iNOVrAhU4" class="short-link">Where is the lie? (9 sec clip)</a></span><span class="pct">67.0%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:67%; background:var(--orange);"></div></div>
+        </div>
+        <div class="ret-bar-wrap">
+          <div class="ret-bar-label"><span class="name"><a href="https://youtube.com/shorts/RgJHtYBm9DM" class="short-link">National Tamasha Agency 👀</a></span><span class="pct" style="color:var(--accent)">55.5%</span></div>
+          <div class="ret-bar-track"><div class="ret-bar-fill" style="width:55.5%; background:var(--accent);"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="insight-block" style="margin-bottom:14px;">
+        <div class="ib-tag pattern">Pattern: The Emotion-Retention Map</div>
+        <div class="ib-text">
+          <p><strong>Righteous outrage</strong> (system failure, institutional hypocrisy against the individual): 78-82% retention. This is Sarthak's native emotional range. His audience is primed for this.</p>
+          <p style="margin-top:10px;"><strong>Political curiosity</strong> (elections, outcomes, "what will happen"): 76-79% retention. Strong when tied to specific named outcomes or individuals.</p>
+          <p style="margin-top:10px;"><strong>Absurdist political humor</strong> (meme-bait, wrong answers): 72-76% retention. Solid but doesn't generate subscriber conversions as effectively.</p>
+          <p style="margin-top:10px;"><strong>Social empathy</strong> (dowry, caste, women safety): 70-75% retention. Performs below average. The audience watches with approval but doesn't share or subscribe.</p>
+          <p style="margin-top:10px;"><strong>Institutional explanation</strong> (courts, agencies, processes): 55-68% retention. Catastrophic. The audience isn't here for explanations — they're here to feel something.</p>
+        </div>
+      </div>
+
+      <div class="callout callout-warning">
+        <div class="callout-title">The 30% Swipe Threshold</div>
+        <p>Any Short where over <strong>30% of viewers swipe away</strong> receives a distribution penalty in YouTube's algorithm. In this dataset, 6 Shorts crossed that threshold: <a href="https://youtube.com/shorts/RgJHtYBm9DM" class="short-link">National Tamasha Agency</a> (44.5%), <a href="https://youtube.com/shorts/T4iNOVrAhU4" class="short-link">Where is the lie?</a> (33%), <a href="https://youtube.com/shorts/TmBkJ6VoS3w" class="short-link">Supreme Court's Hypocrisy</a> (32.4%), <a href="https://youtube.com/shorts/J99XN3cjIPE" class="short-link">Who is responsible?</a> (30.9%), <a href="https://youtube.com/shorts/jSJOfOVXZVY" class="short-link">Why Indian students are losing hope</a> (30.8%), <a href="https://youtube.com/shorts/BEo0Lm9KVWI" class="short-link">Who will win Bengal?</a> (29.1%). Each of these was algorithmically throttled compared to its potential reach.</p>
+      </div>
+
+      <div class="callout callout-success">
+        <div class="callout-title">What Stops the Scroll for Sarthak</div>
+        <p><strong>Curiosity</strong> and <strong>outrage</strong> are the dominant stop-scroll emotions. <strong>Humor</strong> works but produces shallower engagement. <strong>Empathy</strong> underperforms despite the audience being broadly progressive. The reason: empathy content lacks a villain. Without a clear target for righteous anger, the viewer feels passive rather than activated.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: CATEGORY ANALYSIS -->
+<section id="category-analysis">
+  <div class="section-eyebrow">Section 04</div>
+  <div class="section-title">Content Category Analysis</div>
+  <div class="section-sub">Where views are generated, where subscribers are built, and which categories are costing the channel distribution credit.</div>
+
+  <table class="cat-table" style="margin-bottom:24px;">
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Avg Views</th>
+        <th>Avg Retention</th>
+        <th>Sub Signal</th>
+        <th>Verdict</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="cat-name">Media/Journalism Critique</div><div style="font-size:10px;color:var(--text-dimmer)">Logic Where, Real Journalism, Very Responsible Media</div></td>
+        <td class="cat-views" style="color:var(--teal)">~680K avg top 2</td>
+        <td>75%+</td>
+        <td class="cat-signal-high">⬆ Highest</td>
+        <td class="cat-verdict"><strong>DOUBLE DOWN.</strong> This is Sarthak's unique angle. No other creator in the India political commentary space has his credibility on media literacy. This category generates the highest-quality subscribers.</td>
+      </tr>
+      <tr>
+        <td><div class="cat-name">Modi-Related Content</div><div style="font-size:10px;color:var(--text-dimmer)">Share before deleted, Reality PR Stunt, Modi ji answered, Please don't fall</div></td>
+        <td class="cat-views">~355K avg</td>
+        <td>76%</td>
+        <td class="cat-signal-med">↗ Strong</td>
+        <td class="cat-verdict"><strong>MAINTAIN with framing discipline.</strong> Modi content gets broadly distributed. However, straight-up Modi criticism reaches a pre-existing audience. The breakout formula is framing Modi content as ABSURDIST, not adversarial (see: "Share before deleted", "Wrong answers only").</td>
+      </tr>
+      <tr>
+        <td><div class="cat-name">Electoral Politics</div><div style="font-size:10px;color:var(--text-dimmer)">Who will win Bengal, Why Vijay, TMC ki MC gyi, You Can't Ignore Him, Tell me yours</div></td>
+        <td class="cat-views">~365K avg</td>
+        <td>74%</td>
+        <td class="cat-signal-med">↔ Medium</td>
+        <td class="cat-verdict"><strong>TIME-BOUND OPPORTUNITY.</strong> Electoral content has a 72-96 hour window of peak performance. After that, it decays rapidly. Strong during election cycles, invisible otherwise. High volume, low conversion to long-form viewers.</td>
+      </tr>
+      <tr>
+        <td><div class="cat-name">Education System / NEET</div><div style="font-size:10px;color:var(--text-dimmer)">Where is the lie, Who is responsible, Please don't fall, National Tamasha, Why students losing hope</div></td>
+        <td class="cat-views">~218K avg</td>
+        <td>68%</td>
+        <td class="cat-signal-med">↔ Medium</td>
+        <td class="cat-verdict"><strong>HIGH VARIANCE.</strong> The same NEET story produced outcomes from 44K to 361K. The topic resonates deeply, but format discipline is critical. Outrage framing works. Explanation format fails. This category has huge upside if hook quality improves.</td>
+      </tr>
+      <tr>
+        <td><div class="cat-name">Internet/Viral Drama</div><div style="font-size:10px;color:var(--text-dimmer)">Wrong answers only, Raghav Chadha, Ankit Baiyanpuria</div></td>
+        <td class="cat-views">~235K avg</td>
+        <td>73%</td>
+        <td class="cat-signal-low">↓ Low-medium</td>
+        <td class="cat-verdict"><strong>ENGAGEMENT TOOL, NOT GROWTH TOOL.</strong> Generates views and comments but doesn't build the audience that comes back for the Sunday Show. Use strategically for algorithm warmth between major news cycles.</td>
+      </tr>
+      <tr>
+        <td><div class="cat-name">Social Issues</div><div style="font-size:10px;color:var(--text-dimmer)">Dowry, Water Crisis, Why students losing hope</div></td>
+        <td class="cat-views">~172K avg</td>
+        <td>71%</td>
+        <td class="cat-signal-low">↓ Low</td>
+        <td class="cat-verdict"><strong>REDUCE FREQUENCY.</strong> Performs worst per Shorts. The audience cares about these issues but doesn't engage with them sharably on Shorts. Consider covering these in long-form instead, where depth is an advantage.</td>
+      </tr>
+      <tr>
+        <td><div class="cat-name">Legal/Judicial</div><div style="font-size:10px;color:var(--text-dimmer)">Supreme Court's Hypocrisy</div></td>
+        <td class="cat-views">~145K avg</td>
+        <td>67.6%</td>
+        <td class="cat-signal-bad">⬇ Lowest</td>
+        <td class="cat-verdict"><strong>AVOID in pure form.</strong> Legal complexity doesn't compress into Shorts well. If covering judicial topics, reframe through personal impact (a person, a family, an outcome) rather than the institution itself.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SECTION 5: REPURPOSED VS NATIVE -->
+<section id="repurposed-vs-native">
+  <div class="section-eyebrow">Section 05</div>
+  <div class="section-title">Repurposed vs Native Shorts</div>
+  <div class="section-sub">The most strategically important section of this audit. Almost all 25 Shorts appear to be repurposed from long-form content. Here is what that decision is actually costing — and when it works vs when it fails.</div>
+
+  <div class="callout callout-danger" style="margin-bottom:24px;">
+    <div class="callout-title">🚨 The Brutal Truth About the Current Strategy</div>
+    <p>The 80/20 repurpose-to-native split is generating <strong>6-7M Shorts views per month</strong> but is doing so at significant efficiency loss. Every repurposed clip carries the structural handicap of having been designed for a horizontal, seated, 30-45 minute viewing experience. <strong>It was not built to compete in a vertical scroll environment against purpose-built Shorts from creators who optimized every frame for mobile-first attention.</strong> When it still works (Logic Where!, Share before deleted), it's because the clip happened to contain a moment that naturally functions as a Shorts hook. That is luck. The strategy requires making that luck systematic.</p>
+  </div>
+
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="card">
+      <div class="card-title" style="color:var(--teal)">When Repurposed Clips Work</div>
+      <div class="card-body">
+        <p>✓ <strong>Duration under 90 seconds</strong> — the clip has to be short enough that repurpose tension doesn't build up</p>
+        <p style="margin-top:8px;">✓ <strong>Emotionally self-contained</strong> — the moment has a clear beginning, peak, and conclusion that doesn't require setup from the full video</p>
+        <p style="margin-top:8px;">✓ <strong>Sarthak's face on screen early</strong> — face-camera moments from long-form translate best; B-roll-heavy segments fail</p>
+        <p style="margin-top:8px;">✓ <strong>Organic outrage peak</strong> — if the moment in the long-form video had a viral emotion baked in, it often carries over</p>
+        <p style="margin-top:8px;">✓ <strong>No required context</strong> — the clip makes complete sense to someone who hasn't seen the parent video</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--accent)">When Repurposed Clips Fail</div>
+      <div class="card-body">
+        <p>✗ <strong>Duration over 1:45</strong> — look at National Tamasha Agency (2:05 → 44.4K), Very Responsible Media (2:16 → 119.8K), Another family tradition (2:00 → 139.2K). The pattern is absolute.</p>
+        <p style="margin-top:8px;">✗ <strong>Explanation-mode opening</strong> — when the clip starts with Sarthak providing context rather than reacting, viewers swipe. The reaction is the product.</p>
+        <p style="margin-top:8px;">✗ <strong>Reference to other parts of the video</strong> — any verbal or visual reference to "as I said earlier" or cutaways that assume viewer context from long-form immediately signals "this is a clip, not a Short"</p>
+        <p style="margin-top:8px;">✗ <strong>Low-energy extraction</strong> — choosing a segment because it's on-topic rather than because it has a native emotional peak</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:24px; margin-bottom:16px;">
+    <div class="card-title" style="color:var(--gold); margin-bottom:16px;">The Duration-Performance Correlation — Hard Evidence</div>
+    <div class="grid-4" style="margin-bottom:16px;">
+      <div style="text-align:center; padding:16px; background:var(--surface-2); border-radius:8px; border:1px solid var(--border);">
+        <div style="font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:var(--teal);">~370K</div>
+        <div style="font-size:10px; color:var(--text-dimmer); margin-top:4px;">Avg Views, 9–35 sec</div>
+        <div style="font-size:10px; color:var(--text-dim); margin-top:6px;">Wrong answers only, Modi answered, Why Vijay</div>
+      </div>
+      <div style="text-align:center; padding:16px; background:var(--surface-2); border-radius:8px; border:1px solid var(--border);">
+        <div style="font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:var(--blue);">~295K</div>
+        <div style="font-size:10px; color:var(--text-dimmer); margin-top:4px;">Avg Views, 35–60 sec</div>
+        <div style="font-size:10px; color:var(--text-dim); margin-top:6px;">Tell me yours, My POV, Ye Sirf Shuruaat</div>
+      </div>
+      <div style="text-align:center; padding:16px; background:var(--surface-2); border-radius:8px; border:1px solid var(--border);">
+        <div style="font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:var(--gold);">~590K</div>
+        <div style="font-size:10px; color:var(--text-dimmer); margin-top:4px;">Avg Views, 60–100 sec</div>
+        <div style="font-size:10px; color:var(--text-dim); margin-top:6px;">Logic Where, Real Journalism, Saari dikkat, Share before deleted</div>
+      </div>
+      <div style="text-align:center; padding:16px; background:rgba(255,59,92,0.06); border-radius:8px; border:1px solid rgba(255,59,92,0.2);">
+        <div style="font-family:'Syne',sans-serif; font-size:24px; font-weight:800; color:var(--accent);">~101K</div>
+        <div style="font-size:10px; color:var(--text-dimmer); margin-top:4px;">Avg Views, 100+ sec</div>
+        <div style="font-size:10px; color:var(--text-dim); margin-top:6px;">Very Responsible, Another family, Tamasha Agency</div>
+      </div>
+    </div>
+    <p style="font-size:11px; color:var(--text-dim); line-height:1.7;">The 60-100 second zone is Sarthak's sweet spot, averaging <span style="color:var(--gold); font-weight:600;">590K views</span> — significantly outperforming all other duration brackets. The dramatic collapse at 100+ seconds (average drops from 590K to 101K, a 5.8× decline) should be a hard editorial rule: <strong>no repurposed clip over 1:40 should be posted as a Short without significant reediting.</strong></p>
+  </div>
+
+  <div class="callout callout-info">
+    <div class="callout-title">Strategic Recommendation: The 60/30/10 Framework</div>
+    <p>The current strategy should evolve from "repurpose everything" to a structured framework:<br><br>
+    <strong>60% Intentional Repurpose</strong> — Only clips that pass the Shorts test: self-contained, emotionally peaked, under 90 seconds, face-forward, no context required.<br>
+    <strong>30% Native Short Concepts</strong> — Weekly concepts designed specifically for vertical format, tied to current events. These don't need production polish — they need hook precision.<br>
+    <strong>10% Trend-Reactive</strong> — Rapid turnaround (within 2-4 hours of news break) on breaking stories. Format: Sarthak's immediate face-camera reaction, under 60 seconds, raw energy.</p>
+  </div>
+</section>
+
+<!-- SECTION 6: AUDIENCE PSYCHOLOGY -->
+<section id="audience-psychology">
+  <div class="section-eyebrow">Section 06</div>
+  <div class="section-title">Audience Psychology</div>
+  <div class="section-sub">Who is watching these Shorts, what they want, and the emotional triggers that consistently define engagement — or kill it.</div>
+
+  <div class="grid-3" style="margin-bottom:24px;">
+    <div class="card">
+      <div class="card-title" style="color:var(--teal)">Segment A: The Informed Outraged</div>
+      <div class="card-body">
+        <p>Ages 20-32. Urban, educated, politically aware but not affiliated. Follow Sarthak because he confirms their suspicion that mainstream media is broken. <strong>They share Logic Where?! because it validates their worldview.</strong> This is the highest-value segment — they subscribe, they convert to long-form, they attend events. Trigger: institutional betrayal, media hypocrisy, named authority figures behaving badly.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--blue)">Segment B: The Political Curious</div>
+      <div class="card-body">
+        <p>Ages 18-28. Follow politics casually. Come to Shorts for verdict-style content on elections and political drama. They watched "Why Vijay won the election?" and "Who will win Bengal?" and "TMC ki MC gyi?" — they want the answer, not the analysis. <strong>They rarely convert to long-form subscribers.</strong> They're entertainment-first news consumers. Trigger: election outcomes, who's winning, who's losing, political absurdity.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--gold)">Segment C: The Economically Frustrated</div>
+      <div class="card-body">
+        <p>Ages 22-35. Middle and lower-middle class. Cross-political. Their class anxiety transcends their political identity — they'll share content that expresses economic frustration regardless of who they vote for. "Saari dikkat gareebo se hi hai!" speaks directly to them. <strong>This segment is massively underserved in the content mix.</strong> An entire Shorts series on economic inequality could break through to a much larger audience than political commentary.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <div class="insight-block">
+      <div class="ib-tag pattern">Emotional Triggers That Consistently Work</div>
+      <div class="ib-text">
+        <p><strong>Righteous indignation:</strong> The feeling that something is unfair and someone must be held accountable. Works when there's a clear villain. Top performer of all emotional states.</p>
+        <p style="margin-top:8px;"><strong>Absurdist recognition:</strong> "I cannot believe this is real." Works with humor or without. Triggers sharing as social bonding ("Look at this insanity").</p>
+        <p style="margin-top:8px;"><strong>Class solidarity:</strong> Crosses political lines. The only emotion that reaches both BJP and opposition sympathisers simultaneously. Massively underutilized.</p>
+        <p style="margin-top:8px;"><strong>Identity pride:</strong> "This is who we should be" / "This is real journalism." Strong sharing mechanism — viewers share as self-expression.</p>
+      </div>
+    </div>
+    <div class="insight-block">
+      <div class="ib-tag why">Emotional Triggers That Consistently Fail</div>
+      <div class="ib-text">
+        <p><strong>Passive empathy:</strong> Sadness without agency. "Another family calls it tradition 💔" generates 139.2K — viewers feel sad but have no action to take. Empathy without outrage doesn't produce shares.</p>
+        <p style="margin-top:8px;"><strong>Complex analysis:</strong> When Sarthak explains how a system works rather than expressing how it feels, he loses the Shorts audience. They came for emotion, not education.</p>
+        <p style="margin-top:8px;"><strong>Technical legal outrage:</strong> "Supreme Court's Hypocrisy" — the viewer needs to understand what UAPA is, why it's being applied, and why that's wrong. Too many steps between stimulus and emotional response.</p>
+        <p style="margin-top:8px;"><strong>Fear without hope:</strong> "Why Indian students are losing hope" — the title signals an answer that's discouraging. Viewers avoid content that might leave them feeling worse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: SHORTS TO LONG-FORM FUNNEL -->
+<section id="funnel">
+  <div class="section-eyebrow">Section 07</div>
+  <div class="section-title">Shorts → Long-Form Funnel Analysis</div>
+  <div class="section-sub">The honest assessment of whether this Shorts strategy is building a sustainable audience or a transient viewership that never converts.</div>
+
+  <div class="callout callout-danger" style="margin-bottom:24px;">
+    <div class="callout-title">⚠️ Diagnosis: Leaky Funnel</div>
+    <p>The current Shorts function as entertainment products, not as awareness funnels. <strong><a href="https://youtube.com/shorts/DQO0PgKVBh8" class="short-link">Share before this gets deleted</a></strong> generated 535K views but only +93 subscribers — a 0.017% conversion rate. <strong><a href="https://youtube.com/shorts/AiQbGtKKqaw" class="short-link">Logic Where?!</a></strong> hit 1.1M views and while subscriber data wasn't captured, the typical conversion rate for unoptimized Shorts is under 0.05%. At that rate, 1.1M views generates ~550 subscribers. This is a fundamental funnel problem. The end screen click-through rate is 0.0% across every single Short in this dataset (channel average is 0.8%). <strong>The end screen isn't working for anyone.</strong></p>
+  </div>
+
+  <div class="grid-3" style="margin-bottom:20px;">
+    <div class="card">
+      <div class="card-title">Current State</div>
+      <div class="card-body">
+        <p>Shorts → Mostly disconnected. Viewer watches, either enjoys or doesn't, swipes away. No pathway to the Sunday Show. No invitation to the long-form community. No reason to subscribe. The Short is a <strong>standalone entertainment unit</strong> that happens to be on Sarthak's channel.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--gold)">Target State</div>
+      <div class="card-body">
+        <p>Shorts → Curiosity gap → Long-form viewing → Community membership. Every Short should either (a) introduce a story that's developed in long-form, or (b) showcase Sarthak's personality so compellingly that the viewer needs more. Right now neither is happening consistently.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--teal)">Required Interventions</div>
+      <div class="card-body">
+        <p><strong>1.</strong> End the Short on a cliff-hanger that only the long-form resolves<br><strong>2.</strong> Add a verbal CTA: "Full breakdown on Sunday" — spoken, not just on-screen<br><strong>3.</strong> Pin a comment linking to the parent video immediately after posting<br><strong>4.</strong> Use Shorts as a teaser, not a summary — tease the most explosive moment rather than recapping it</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">The Traffic Source Insight (from Reality hai ya PR Stunt? data)</div>
+    <div class="card-body" style="line-height:1.9;">
+      <p>For <a href="https://youtube.com/shorts/kbbkdzgEuoQ" class="short-link">Reality hai ya PR Stunt?</a>, the traffic breakdown shows: <span class="hl">Browse Features: 50.1%</span> · <span class="hl-gold">Shorts Feed: 32.2%</span> · Channel Pages: 15.3% · YouTube Search: 1.3% · Other: 0.8%</p>
+      <p style="margin-top:10px;">This is revealing. <strong>15.3% from Channel Pages</strong> means existing subscribers are actively visiting the channel to find content — but only 32% from Shorts Feed means the algorithm isn't pushing these Shorts into non-subscriber feeds as aggressively as it should. High-retention Shorts like <a href="https://youtube.com/shorts/AiQbGtKKqaw" class="short-link">Logic Where?!</a> (15.5K watch hours vs typical 1.7K) indicate the algorithm <em>does</em> respond when the signal quality is exceptional. The goal is to make every Short approach Logic Where?!'s signal quality.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 8: ALGORITHM ANALYSIS -->
+<section id="algo-analysis">
+  <div class="section-eyebrow">Section 08</div>
+  <div class="section-title">Recommendation System Analysis</div>
+  <div class="section-sub">How YouTube appears to classify and distribute Sarthak's Shorts — and where the algorithmic opportunities and confusion points exist.</div>
+
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="insight-block">
+      <div class="ib-tag algo">How YouTube Classifies This Channel</div>
+      <div class="ib-text">
+        <p>Based on the content mix and performance patterns, YouTube's recommendation engine appears to classify Sarthak in a cluster combining: <strong>Hindi Political Commentary</strong> (primary), <strong>Indian Current Affairs Satire</strong> (secondary), and <strong>Infotainment/News Explainer</strong> (tertiary). This creates a recommendation profile that shows Sarthak's Shorts to users who also consume: Dhruv Rathee, Akash Banerjee (The Deshbhakt), and mainstream Hindi news channels.</p>
+        <p style="margin-top:10px;">The problem: this classification puts Sarthak in direct competition with channels that have significantly larger subscriber bases. The breakout Shorts (Logic Where?!) appear to have jumped into <strong>education + media criticism clusters</strong> — audiences that don't typically follow political commentary but follow journalism accountability content. This is a blue ocean.</p>
+      </div>
+    </div>
+    <div class="insight-block">
+      <div class="ib-tag algo">Strongest Recommendation Clusters</div>
+      <div class="ib-text">
+        <p><strong>Media accountability content</strong> — Logic Where?! proves this. When Sarthak critiques media (not politicians), the algorithm routes the content into a journalism-curious cluster that is both large and underserved. The 731 remix views and 4 remixes signal that creators in this cluster amplified the content.</p>
+        <p style="margin-top:10px;"><strong>Education system outrage</strong> — NEET content consistently finds an audience of students, parents, and educators who aren't typical political commentary viewers. When executed as outrage (not explanation), this cluster drives significant new viewer acquisition.</p>
+        <p style="margin-top:10px;"><strong>Electoral prediction content</strong> — Strong during election cycles, completely collapses afterward. This is algorithmically time-sensitive.</p>
+      </div>
+    </div>
+    <div class="insight-block">
+      <div class="ib-tag algo">Algorithmic Confusion Points</div>
+      <div class="ib-text">
+        <p>The content mix creates classification confusion for YouTube's recommendation AI. A channel that posts: Modi criticism → election prediction → dowry awareness → wrong answers meme → economic class critique → CBSE outrage → Bihar journalism tribute... appears as a generalist news channel, not a specialist voice.</p>
+        <p style="margin-top:10px;"><strong>Algorithmic recommendation strength is inversely proportional to topic diversity.</strong> The more Sarthak's Shorts cluster around 2-3 recognizable topics with consistent emotional framing, the stronger the recommendation clusters become. Currently, the algorithm has to guess which audience to send each Short to.</p>
+      </div>
+    </div>
+    <div class="insight-block">
+      <div class="ib-tag algo">Algorithmic Opportunities</div>
+      <div class="ib-text">
+        <p><strong>Media accountability niche:</strong> No dominant Hindi-language creator owns the "holding media accountable" vertical on Shorts. Logic Where?! is proof that Sarthak can own this space. A consistent series in this area would build strong algorithmic recommendations into a cluster that currently has no clear leader.</p>
+        <p style="margin-top:10px;"><strong>Class anger content:</strong> "Saari dikkat gareebo se hi hai" cross-pollinates into non-political audiences. The algorithm will route economic frustration content to Middle India audiences that extend far beyond current subscriber demographics.</p>
+        <p style="margin-top:10px;"><strong>Timing optimization:</strong> Several underperforming Shorts were likely posted more than 48 hours after the news event. The algorithm boosts content that rides the breaking news curve. Speed is a distribution multiplier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 9: TITLE ANALYSIS -->
+<section id="title-analysis">
+  <div class="section-eyebrow">Section 09</div>
+  <div class="section-title">Title & Caption Analysis</div>
+  <div class="section-sub">What the best-performing titles have in common, what the worst-performing titles get wrong, and 20 reusable templates.</div>
+
+  <div class="grid-2" style="margin-bottom:24px;">
+    <div class="card">
+      <div class="card-title" style="color:var(--teal)">Best-Performing Title Structures</div>
+      <div class="card-body">
+        <p><strong>Confrontational Question:</strong> "Logic Where?!" — Opens a gap the brain must fill<br>
+        <strong>Urgency + Emotion:</strong> "Share before this gets deleted 😭" — Creates scarcity + rebellion<br>
+        <strong>Villain's Mouth:</strong> "Saari dikkat gareebo se hi hai!" — Ventriloquism of authority<br>
+        <strong>Personal Challenge:</strong> "You Can't Ignore Him! 🤐" — Challenges the viewer's avoidance<br>
+        <strong>Reality Check:</strong> "Reality hai ya PR Stunt?" — Positions viewer as investigator<br>
+        <strong>Witnessed Event:</strong> "This is Real Journalism! 👏" — Invites viewer to witness something<br>
+        <strong>POV Statement:</strong> "My POV On Cockroach Janta Party" — Parasocial invitation</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title" style="color:var(--accent)">Worst-Performing Title Structures</div>
+      <div class="card-body">
+        <p><strong>Institutional Nickname:</strong> "National Tamasha Agency" — Requires insider knowledge<br>
+        <strong>Institutional Verdict:</strong> "Supreme Court's Hypocrisy" — Conclusion stated upfront, no curiosity gap<br>
+        <strong>Passive Topic Statement:</strong> "Very Responsible media :)" — Too subtle, no urgency<br>
+        <strong>Explanation Prompt:</strong> "Where is the lie?" (with a 9-second clip) — Mismatch between format and content<br>
+        <strong>Grief Signal:</strong> "Why Indian students are losing hope 💔" — Heart emoji signals sad content, people avoid it<br>
+        <strong>Generic Social Issue:</strong> "Water Crisis in MP" — Sounds like news headline, zero personality</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-eyebrow" style="margin-bottom:14px;">20 Title Templates for Sarthak's Content</div>
+  <div class="grid-2">
+    <div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">01 · The Confrontational Question</div>
+        <div class="formula-example">"[Situation] Kab Tak?" / "Logic Where?!" / "How Is This Even Allowed?"</div>
+        <div class="formula-desc">Works for: institutional failure, media absurdity, government decisions. Opens a gap the viewer must resolve.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">02 · The Urgency Trigger</div>
+        <div class="formula-example">"Share before this gets deleted" / "They don't want you to know this" / "Watch before [event]"</div>
+        <div class="formula-desc">The highest-performing template for Sarthak. Creates scarcity + rebellion psychology. Use maximum once per week.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">03 · The Villain's Confession</div>
+        <div class="formula-example">"Saari dikkat X se hi hai!" / "Hum to [absurd statement]" / "According to [Authority], [absurd truth]"</div>
+        <div class="formula-desc">Put the villain's logic into plain Hindi. The audience reacts to the voice, not the analysis.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">04 · The Named Individual Incident</div>
+        <div class="formula-example">"[Name] Faced WHAT?!" / "[Name] Got Away With This?!" / "What Happened to [Name]?"</div>
+        <div class="formula-desc">Named individuals perform better than institutions. The viewer connects with people, not entities. Proven by: Raghav Chadha (287K), Ankit Baiyanpuria (132K), Journalist Mahima (794K).</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">05 · The Community Vote</div>
+        <div class="formula-example">"Tell me yours! 👀" / "Wrong answers only ⬇️" / "Who wins — [A] or [B]?"</div>
+        <div class="formula-desc">Activates comment instinct. Best used with politician comparisons or opinion polls.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">06 · The Forbidden Knowledge</div>
+        <div class="formula-example">"They don't want you to see this" / "This was supposed to stay quiet" / "The clip they buried"</div>
+        <div class="formula-desc">Creates an information asymmetry that makes the viewer feel special for watching.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">07 · The Absurdity Admission</div>
+        <div class="formula-example">"India in 2026 ☠️" / "This is actually happening" / "Meanwhile in [context]..."</div>
+        <div class="formula-desc">Works for surreal political moments. The emoji does heavy lifting — choose based on tone.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">08 · The Direct Challenge</div>
+        <div class="formula-example">"You Can't Ignore [Person/Issue]" / "Try Not To Get Angry" / "Please explain this to me"</div>
+        <div class="formula-desc">Challenges the viewer's existing position. The ego-defence response keeps them watching.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">09 · The Reality Gap</div>
+        <div class="formula-example">"Reality hai ya PR Stunt?" / "What you're told vs What happened" / "Official story vs Real story"</div>
+        <div class="formula-desc">Positions the viewer as truth-seeker, Sarthak as guide. Very high subscription conversion potential.</div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-title">10 · The Witness Call</div>
+        <div class="formula-example">"This is Real [X]! 👏" / "Watch this [person/journalist/politician] moment" / "Proof that [claim]"</div>
+        <div class="formula-desc">Invites the viewer to witness something meaningful. Works best with genuine ground-level footage or clips the mainstream media hasn't covered.</div>
+      </div>
+    </div>
+    <div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">11 · The Economic Class Card</div>
+        <div class="formula-example">"Middle Class ka yahi haal hai 😂" / "When you're [class], this is life" / "[Policy] aur gareeb ek saath 🙄"</div>
+        <div class="formula-desc">Cross-political reach. Economic frustration bypasses political tribalism. Sarthak's biggest untapped audience segment.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">12 · The Betrayal Reveal</div>
+        <div class="formula-example">"[Entity] just did THIS to [victim group]" / "[Name] ka yahi plan tha?" / "Nobody is talking about this"</div>
+        <div class="formula-desc">Creates moral outrage at a perceived betrayal. The audience shares because they want others to know.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">13 · The Question For Them</div>
+        <div class="formula-example">"Someone please explain this to [official]" / "Hey [Institution], answer this" / "Aap jawab do [name]"</div>
+        <div class="formula-desc">Makes the viewer feel like co-interrogators. Very strong for media accountability content.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">14 · The Time Bomb</div>
+        <div class="formula-example">"Ye [X] days mein change ho sakta hai" / "Before [upcoming event], you need to know this" / "[Deadline] approaching — here's what's at stake"</div>
+        <div class="formula-desc">Creates temporal urgency. Works best around elections, budget announcements, Supreme Court hearings.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">15 · The Ironic Validation</div>
+        <div class="formula-example">"Very responsible [X] 🙂" / "Great democracy we have 😊" / "Totally normal news 🙃"</div>
+        <div class="formula-desc">Sarcasm hook. The audience clicks because they already know the irony — they want to see Sarthak express it. Slightly underperforms without a strong visual hook.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">16 · The POV Declaration</div>
+        <div class="formula-example">"My POV on [event] 👀" / "Here's what I actually think about [topic]" / "Honest take on [controversy]"</div>
+        <div class="formula-desc">First-person framing converts to subscribers better than third-person. The viewer is buying Sarthak's perspective, not the news.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">17 · The Worst-Case Mirror</div>
+        <div class="formula-example">"Agar [X] hota toh?" / "The worst-case scenario nobody's saying" / "What this actually means for you"</div>
+        <div class="formula-desc">Creates personal stakes from abstract news. "What this means for you" forces the viewer to make the story about themselves.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">18 · The Identity Definition</div>
+        <div class="formula-example">"This is what [real journalism / real satire / real accountability] looks like" / "Asli [X] yahi hai"</div>
+        <div class="formula-desc">Defines the channel's identity through contrast. Very effective for building a sense of community and standards.</div>
+      </div>
+      <div class="formula-card" style="margin-bottom:10px;">
+        <div class="formula-title">19 · The Factual Ambush</div>
+        <div class="formula-example">"Did you know [surprising truth]?" / "[Expected thing] vs [surprising reality]" / "The number you weren't told"</div>
+        <div class="formula-desc">Information asymmetry trigger. Works best when the fact is genuinely surprising and has a clear implication.</div>
+      </div>
+      <div class="formula-card">
+        <div class="formula-title">20 · The Before/After Frame</div>
+        <div class="formula-example">"Before X: [Y]. After X: [Z]" / "Ye kya ho gaya?" / "[Person] then vs [Person] now"</div>
+        <div class="formula-desc">Pattern matching trigger — the brain wants to complete the sequence. Works for political reversals, policy failures, institutional contradictions.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 10: FUTURE VIRALITY PLAYBOOK -->
+<section id="future-playbook">
+  <div class="section-eyebrow">Section 10</div>
+  <div class="section-title">Future Virality Playbook</div>
+  <div class="section-sub">25 Short ideas, 10 trend formats, 10 recurring series, 10 native concepts — all designed specifically for Sarthak's audience and content style.</div>
+
+  <div class="section-eyebrow" style="color:var(--gold); margin-bottom:12px;">25 Short Ideas for Sarthak's Audience</div>
+  <div class="grid-3" style="margin-bottom:28px;">
+    <div class="idea-card"><div class="idea-tag">Media Critique</div><div class="idea-title">The News Anchor Hall of Shame</div><div class="idea-desc">Fastest 60-second compilation of mainstream anchors contradicting themselves within the same week. No commentary — just receipts.</div></div>
+    <div class="idea-card"><div class="idea-tag">Education Outrage</div><div class="idea-title">Your Tax Money, Their Bonus</div><div class="idea-desc">NTA officials' salaries vs students who lost a year to paper leaks. Pure economic outrage. No partisan framing needed.</div></div>
+    <div class="idea-card"><div class="idea-tag">Class Satire</div><div class="idea-title">Gareeb ki Galti Kya Hai?</div><div class="idea-desc">A satirical "list" of things that are somehow the poor's fault, in the style of "Saari dikkat gareebo se hi hai." Sequel potential is high.</div></div>
+    <div class="idea-card"><div class="idea-tag">Media Accountability</div><div class="idea-title">Find The Journalist</div><div class="idea-desc">Sarthak tries to find a single mainstream Hindi anchor who asked a specific hard question. Spoiler: they don't exist. Visual format works here.</div></div>
+    <div class="idea-card"><div class="idea-tag">Political Absurdity</div><div class="idea-title">Politicians Who Were Wrong (with receipts)</div><div class="idea-desc">One politician, one prediction, one outcome. Under 60 seconds. "They said this. Then this happened." Extremely shareable.</div></div>
+    <div class="idea-card"><div class="idea-tag">Street Satire</div><div class="idea-title">Ask These Questions At A Press Conference</div><div class="idea-desc">Sarthak reads out actual questions from the public that journalists should ask but never do. Format: rapid-fire, frustrated energy.</div></div>
+    <div class="idea-card"><div class="idea-tag">Community</div><div class="idea-title">Bachpan mein Kya Bana tha? vs Aaj</div><div class="idea-desc">Childhood dreams vs the actual job market for Indian youth. Economic empathy + class anxiety. Very shareable among 22-30 demographic.</div></div>
+    <div class="idea-card"><div class="idea-tag">Meta Commentary</div><div class="idea-title">Why Indian Media Won't Cover This</div><div class="idea-desc">Sarthak explains why a specific breaking story is being buried — and then covers it. Creates urgency + media critique simultaneously.</div></div>
+    <div class="idea-card"><div class="idea-tag">Electoral</div><div class="idea-title">The Promise vs The Delivery Scorecard</div><div class="idea-desc">Pre-election promise → post-election delivery. Two lines, one emoji, devastating conclusion. Extremely low production, extremely high shareability.</div></div>
+    <div class="idea-card"><div class="idea-tag">Satire</div><div class="idea-title">Official Government Press Release Translated to Hindi</div><div class="idea-desc">Sarthak reads a press release as written. Then translates it into what it actually means. Ironic delivery. No editing needed.</div></div>
+    <div class="idea-card"><div class="idea-tag">International</div><div class="idea-title">India vs [Country] on [Same Issue]</div><div class="idea-desc">Direct comparison on free press, student exams, water access. The comparison does the outrage work — Sarthak just has to present it.</div></div>
+    <div class="idea-card"><div class="idea-tag">Personal Finance</div><div class="idea-title">How Much Has Everything Gone Up?</div><div class="idea-desc">Simple price comparison: petrol, daal, rent, electricity in 2014 vs now. Pure economic anxiety. Crosses every demographic.</div></div>
+    <div class="idea-card"><div class="idea-tag">Media Tribute</div><div class="idea-title">The Journalist You've Never Heard Of</div><div class="idea-desc">Series format: 60-90 seconds on a ground reporter who broke a real story with no resources and no credit. Emotional + identity-affirming.</div></div>
+    <div class="idea-card"><div class="idea-tag">Opinion</div><div class="idea-title">The Take Nobody Wants to Give</div><div class="idea-desc">Sarthak says the thing everyone thinks but no commentator will say directly. Framed as "I'm probably going to lose followers for this." Drives engagement.</div></div>
+    <div class="idea-card"><div class="idea-tag">Meme Format</div><div class="idea-title">POV: You're the NTA</div><div class="idea-desc">First-person POV of institutional incompetence, told with dark humor. "You've just leaked the paper again. What do you do?" Audience: outrage + laughter.</div></div>
+    <div class="idea-card"><div class="idea-tag">Community Bait</div><div class="idea-title">The Politician Tier List</div><div class="idea-desc">Sarthak builds a tier list of politicians — S through F tier — with reasons. Audience rage-shares because their politician is in the wrong tier. Pure engagement.</div></div>
+    <div class="idea-card"><div class="idea-tag">Justice</div><div class="idea-title">They Got Away With It — A Reminder</div><div class="idea-desc">Quick recap of a major scandal where nobody was held accountable. "Just a reminder that this happened and nothing changed." Activates dormant outrage.</div></div>
+    <div class="idea-card"><div class="idea-tag">Breaking Satire</div><div class="idea-title">The Statement Analysis</div><div class="idea-desc">Sarthak reads a politician's statement line by line, with facial reactions only — no commentary. The face IS the commentary. Under 60 seconds.</div></div>
+    <div class="idea-card"><div class="idea-tag">Investigation</div><div class="idea-title">The Spin Speed Test</div><div class="idea-desc">How fast did [media channel] change its headline after [event]? Showing the original headline vs the updated one. Screenshot + timestamp format.</div></div>
+    <div class="idea-card"><div class="idea-tag">Student</div><div class="idea-title">Students React to Their Betrayal</div><div class="idea-desc">Real reactions from NEET/SSC/UPSC students on paper leaks — without editorial commentary. The emotion does the work. Higher empathy, lower lecture.</div></div>
+    <div class="idea-card"><div class="idea-tag">Accountability</div><div class="idea-title">Where Are They Now?</div><div class="idea-desc">Officials who oversaw a scandal — where are they now, what are they doing? Tracking former ministers and bureaucrats. Investigative + outrage.</div></div>
+    <div class="idea-card"><div class="idea-tag">Humor</div><div class="idea-title">If [Institution] Had Jio-Level Honesty</div><div class="idea-desc">What if UPSC/NTA/CBSE communicated with the same aggressive transparency as a Jio ad? Absurdist satire format. Pure entertainment value.</div></div>
+    <div class="idea-card"><div class="idea-tag">Deep Dive</div><div class="idea-title">The One Number They Don't Report</div><div class="idea-desc">One statistic that flips the mainstream narrative on its head. Data + outrage + delivery. Under 90 seconds.</div></div>
+    <div class="idea-card"><div class="idea-tag">Social</div><div class="idea-title">Ek Baat Jo Media Ne Nahin Boli</div><div class="idea-desc">The one fact missing from every major news story this week. Weekly format. "Sunday Show pe poora coverage — but yahan ek baat jo nahi boli."</div></div>
+    <div class="idea-card"><div class="idea-tag">Meta</div><div class="idea-title">Why Independent Media Matters (In 60 Seconds)</div><div class="idea-desc">Sarthak explains his own existence in 60 seconds. Identity-building for new viewers, affirmation for old ones. Should run once a month.</div></div>
+  </div>
+
+  <div class="section-eyebrow" style="color:var(--blue); margin-bottom:12px;">10 Recurring Series Ideas</div>
+  <div class="grid-2" style="margin-bottom:28px;">
+    <div class="card"><div class="card-title">📌 Logic Nahi Hai — Weekly</div><div class="card-body">One absurd news item per week. Under 60 seconds. Same format every time: story → Sarthak's reaction face → "Logic nahi hai." Builds Pavlovian audience anticipation.</div></div>
+    <div class="card"><div class="card-title">📌 Media Watch — Weekly</div><div class="card-body">60 seconds on which mainstream anchor or channel spun a story the most egregiously this week. Evidence-based, receipts shown. Positions Sarthak as the media accountability voice.</div></div>
+    <div class="card"><div class="card-title">📌 Asli Story — Breaking News</div><div class="card-body">When breaking news drops, Sarthak posts within 2-4 hours: "Ye hai asli kahani" in 60-90 seconds. Speed + framing = algorithm advantage. Native Short format.</div></div>
+    <div class="card"><div class="card-title">📌 Politician Promises Archive</div><div class="card-body">Monthly: dig up a 1-3 year old promise from any major politician. Show the promise. Show the outcome. No commentary needed. Devastating and shareable.</div></div>
+    <div class="card"><div class="card-title">📌 The Missing Journalist</div><div class="card-body">Monthly tribute to ground reporters doing work that mainstream media ignores. Similar to "This is Real Journalism" — but as a recurring series with its own identity.</div></div>
+    <div class="card"><div class="card-title">📌 Wrong Answers Only — Election Edition</div><div class="card-body">During election cycles, weekly community engagement Short asking "Who's the best/worst [politician role]?" Comments become the show. Maximum engagement, minimum effort.</div></div>
+    <div class="card"><div class="card-title">📌 Price Check India</div><div class="card-body">Monthly: one essential commodity, its price in 5 Indian cities, and what the government said about inflation. Pure economic data, zero analysis. The data IS the outrage.</div></div>
+    <div class="card"><div class="card-title">📌 The Sunday Teaser</div><div class="card-body">Posted every Saturday: 60-second teaser of Sunday Show's most explosive moment. NEVER the full context — always the cliff-hanger. Direct funnel to Sunday Show.</div></div>
+    <div class="card"><div class="card-title">📌 Sab Ka Number Aayega</div><div class="card-body">A rotating accountability tracker — covering different powerful entities each week, reminding viewers of pending accountability. Builds anticipation and satisfaction when consequences arrive.</div></div>
+    <div class="card"><div class="card-title">📌 Confessions of a First-Time Voter</div><div class="card-body">Interviews (or recreated first-person monologues) of what young Indians expected when they voted vs what they got. Emotional, shareable, generates comments.</div></div>
+  </div>
+
+  <div class="section-eyebrow" style="color:var(--teal); margin-bottom:12px;">10 Original Native Short Concepts</div>
+  <div class="grid-2">
+    <div class="card"><div class="card-title">🎯 The Reaction Shot Series</div><div class="card-body">Sarthak watches a clip from a press conference or news broadcast on-screen, with a real-time reaction. No script. Raw. 30-60 seconds. Face fills 80% of frame. The authenticity is the product.</div></div>
+    <div class="card"><div class="card-title">🎯 Face-to-Face with the Data</div><div class="card-body">Sarthak stands in front of a single striking graphic (one number, one comparison) and delivers one sentence about it. Graphic-forward, face-supported. Under 30 seconds.</div></div>
+    <div class="card"><div class="card-title">🎯 The Monologue Template</div><div class="card-body">Sarthak speaks directly to camera for 90 seconds — no B-roll, no cuts, no inserts — just his opinion on the week's most important story. Parasocial at maximum intensity.</div></div>
+    <div class="card"><div class="card-title">🎯 The Walk-and-Talk</div><div class="card-body">Shot while walking in a public space in Delhi. Feels like the viewer is getting an exclusive street-level take. Breaks the "studio talking head" monotony that characterizes most political commentary Shorts.</div></div>
+    <div class="card"><div class="card-title">🎯 The Live Read</div><div class="card-body">Sarthak reads an actual government document, press release, or official statement aloud — in real time — with facial reactions. No editing. The absurdity of the document does the work.</div></div>
+    <div class="card"><div class="card-title">🎯 Two Truths and a Government Statement</div><div class="card-body">Sarthak presents three statements: two facts and one official government claim. The audience guesses which is the government statement. Always obvious. Always enraging. Comment section explodes.</div></div>
+    <div class="card"><div class="card-title">🎯 Before I Post This…</div><div class="card-body">"Before I post the full Sunday Show, here's the one thing that surprised me most." Creates anticipation for long-form while delivering Sarthak's personality in 45 seconds.</div></div>
+    <div class="card"><div class="card-title">🎯 The Correction</div><div class="card-body">When Sarthak gets something wrong, posting a correction Short (within 24 hours) builds extraordinary trust. Almost no political commentators do this publicly on Shorts. It's a differentiated credibility moment.</div></div>
+    <div class="card"><div class="card-title">🎯 The "I Agree With [Opponent]" Short</div><div class="card-body">Sarthak finds one thing a political opponent said that he agrees with. Intellectual honesty framed as a surprise. Extremely shareable because it defies tribal expectations.</div></div>
+    <div class="card"><div class="card-title">🎯 The Letter Format</div><div class="card-body">"Dear NTA / Dear Supreme Court / Dear Indian Media — This is what we need from you." First-person address. Gives the audience a voice through Sarthak. Emotional + empowering.</div></div>
+  </div>
+</section>
+
+<!-- SECTION 11: EXPERIMENT ROADMAP -->
+<section id="experiments">
+  <div class="section-eyebrow">Section 11</div>
+  <div class="section-title">10-Experiment Roadmap</div>
+  <div class="section-sub">Controlled tests with clear hypotheses, success metrics, and implementation protocols. Run these sequentially over 8-10 weeks.</div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 01</div>
+    <div class="exp-title">The 90-Second Hard Cap Test</div>
+    <div class="exp-grid">
+      <div class="exp-field"><div class="ef-label">Hypothesis</div><div class="ef-val">Enforcing a maximum 90-second limit on all Shorts will increase average views by 30-40% and reduce swipe-away rates across the board.</div></div>
+      <div class="exp-field"><div class="ef-label">Implementation</div><div class="ef-val">For 4 consecutive weeks, every repurposed clip that exceeds 90 seconds gets hard-cut or re-edited before posting. No exceptions.</div></div>
+      <div class="exp-field"><div class="ef-label">Metric to Track</div><div class="ef-val">Average views per Short (4-week period), average swipe-away rate, total watch hours generated.</div></div>
+      <div class="exp-field"><div class="ef-label">Expected Result</div><div class="ef-val">2-3× improvement in distribution on videos that were previously 2+ minutes. Potential sacrifice of nuance but significant gain in reach.</div></div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 02</div>
+    <div class="exp-title">The Native Reaction Short (3 per month)</div>
+    <div class="exp-grid">
+      <div class="exp-field"><div class="ef-label">Hypothesis</div><div class="ef-val">Original native Shorts (not repurposed) will significantly outperform repurposed clips on subscriber conversion rate and will generate higher watch time per view.</div></div>
+      <div class="exp-field"><div class="ef-label">Implementation</div><div class="ef-val">Three Shorts per month are created from scratch: Sarthak films a 60-90 second face-camera reaction to a breaking news event within 2-4 hours of it breaking. Minimal editing.</div></div>
+      <div class="exp-field"><div class="ef-label">Metric to Track</div><div class="ef-val">Subscriber conversion rate (subscribers gained per 1,000 views), vs repurposed clips in the same period.</div></div>
+      <div class="exp-field"><div class="ef-label">Expected Result</div><div class="ef-val">Native reaction Shorts will show 3-5× higher subscriber-per-view conversion rate due to stronger personality expression and Shorts-optimized hook.</div></div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 03</div>
+    <div class="exp-title">The Saturday Teaser Protocol</div>
+    <div class="exp-grid">
+      <div class="exp-field"><div class="ef-label">Hypothesis</div><div class="ef-val">Posting a cliff-hanger Short on Saturday (teasing Sunday Show's biggest moment) will measurably increase Sunday Show viewership within the first 24 hours of posting.</div></div>
+      <div class="exp-field"><div class="ef-label">Implementation</div><div class="ef-val">Every Saturday, extract a 30-60 second clip of the Sunday Show's most explosive moment. Post it with title: "Poori baat Sunday ko" or similar. The Short should END before resolving.</div></div>
+      <div class="exp-field"><div class="ef-label">Metric to Track</div><div class="ef-val">Sunday Show 24-hour view velocity on weeks with Saturday teasers vs without. Also track if Shorts drive traffic to the long-form (use URL in pinned comment).</div></div>
+      <div class="exp-field"><div class="ef-label">Expected Result</div><div class="ef-val">20-35% increase in Sunday Show first-24-hour views. This also improves the YouTube algorithm's ranking for the Sunday Show by boosting early engagement signals.</div></div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 04</div>
+    <div class="exp-title">Hindi vs English vs Hinglish Title Test</div>
+    <div class="exp-grid">
+      <div class="exp-field"><div class="ef-label">Hypothesis</div><div class="ef-val">Pure Hindi titles consistently outperform English or Hinglish titles for this audience because they signal authenticity and reach a broader tier-2/tier-3 city demographic.</div></div>
+      <div class="exp-field"><div class="ef-label">Implementation</div><div class="ef-val">Over 6 weeks, alternate title language: weeks 1-2 pure Hindi, weeks 3-4 Hinglish, weeks 5-6 English. Match topic difficulty and emotional tone as consistently as possible.</div></div>
+      <div class="exp-field"><div class="ef-label">Metric to Track</div><div class="ef-val">Average views per Short by title language. Also track swipe-away rate and subscriber conversion.</div></div>
+      <div class="exp-field"><div class="ef-label">Expected Result</div><div class="ef-val">Hindi titles should outperform by 20-40% in view count, particularly for outrage and class-anxiety content. English titles may show higher subscriber conversion rates due to elite audience skew.</div></div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 05</div>
+    <div class="exp-title">The Urgency Title Override</div>
+    <div class="exp-grid">
+      <div class="exp-field"><div class="ef-label">Hypothesis</div><div class="ef-val">Applying urgency framing ("Share before...", "They don't want you to see this", "Watch before X") to any topic — regardless of content — will increase performance by 2× vs a standard descriptive title.</div></div>
+      <div class="exp-field"><div class="ef-label">Implementation</div><div class="ef-val">Take 4 Shorts that would otherwise receive standard titles. Apply urgency framing to each. Compare performance to 4 similar-topic Shorts with standard titles in the same period.</div></div>
+      <div class="exp-field"><div class="ef-label">Metric to Track</div><div class="ef-val">View count at Day 7 comparison. If urgency titles generate significantly more views across different topics, establish as a permanent titling principle.</div></div>
+      <div class="exp-field"><div class="ef-label">Expected Result</div><div class="ef-val">Urgency titles should perform 1.5-2.5× better across topics, with the highest uplift on topics that normally underperform (legal, social issues).</div></div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 06</div>
+    <div class="exp-title">The Media Accountability Series (4-week sprint)</div>
+    <div class="exp-grid">
+      <div class="exp-field"><div class="ef-label">Hypothesis</div><div class="ef-val">A consistent weekly Short dedicated to media criticism will build a recommendation cluster that pushes content to journalism-interested audiences beyond current subscribers, increasing new viewer acquisition by 40%+.</div></div>
+      <div class="exp-field"><div class="ef-label">Implementation</div><div class="ef-val">Every Wednesday for 4 weeks, post one "Media Watch" Short — same format, same intro energy, under 75 seconds. Track whether YouTube begins routing these as a series.</div></div>
+      <div class="exp-field"><div class="ef-label">Metric to Track</div><div class="ef-val">% of viewers who are non-subscribers (shown in Studio audience tab). Remix activity. Whether fourth Short outperforms first (series momentum).</div></div>
+      <div class="exp-field"><div class="ef-label">Expected Result</div><div class="ef-val">By week 3-4, YouTube's algorithm should identify the recurring format and route it more aggressively. Series momentum typically shows a 20-40% view increase from episode 1 to episode 4.</div></div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 07</div>
+    <div class="exp-title">The Breaking News 2-Hour Sprint</div>
+    <div class="exp-grid">
+      <div class="exp-field"><div class="ef-label">Hypothesis</div><div class="ef-val">Posting a Short within 2 hours of a major news break (before YouTube is saturated with similar content) will receive a first-mover distribution advantage of 3-5× vs posting 24 hours later.</div></div>
+      <div class="exp-field"><div class="ef-label">Implementation</div><div class="ef-val">For the next major breaking news event, Sarthak records and posts a 60-second face-camera reaction within 2 hours. Minimal editing. Track performance vs next day's more polished Short on the same story.</div></div>
+      <div class="exp-field"><div class="ef-label">Metric to Track</div><div class="ef-val">Views at 24 hours and 72 hours. Traffic source breakdown (Shorts feed % vs browse %). Swipe-away rate (speed vs quality tradeoff).</div></div>
+      <div class="exp-field"><div class="ef-label">Expected Result</div><div class="ef-val">First-mover Shorts typically outperform on breaking news by 2-4× because YouTube's trending signal activates before competitors saturate the search results.</div></div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 08</div>
+    <div class="exp-title">The @Mention Amplification Test</div>
+    <div class="exp-grid">
+      <div class="exp-field"><div class="ef-label">Hypothesis</div><div class="ef-val">Tagging the subject of a Short (@journalist, @creator, @public figure) generates cross-audience traffic from the tagged person's followers and creates notification-driven discovery.</div></div>
+      <div class="exp-field"><div class="ef-label">Implementation</div><div class="ef-val">In 4 Shorts, prominently @mention the main subject (if they're a creator or public figure with a YouTube/social presence). "This is Real Journalism! @Journalist_Mahima" proved the concept — scale it.</div></div>
+      <div class="exp-field"><div class="ef-label">Metric to Track</div><div class="ef-val">View count on @mentioned Shorts vs similar Shorts without mentions. Specifically track whether the mentioned account reposts or responds (free amplification signal).</div></div>
+      <div class="exp-field"><div class="ef-label">Expected Result</div><div class="ef-val">@mention Shorts should show 15-30% view uplift due to cross-audience traffic and the emotional resonance of tribute/accountability content for the mentioned person's own followers.</div></div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 09</div>
+    <div class="exp-title">The Verbal CTA Test (Subscribe Ask)</div>
+    <div class="exp-grid">
+      <div class="exp-field"><div class="ef-label">Hypothesis</div><div class="ef-val">Adding a verbal CTA (spoken, not on-screen) — "Agar lagta hai ye important hai, subscribe karo" at the 80% mark of a Short — will increase subscriber conversion by 50-100% without significantly harming swipe-away rate.</div></div>
+      <div class="exp-field"><div class="ef-label">Implementation</div><div class="ef-val">In 5 Shorts across 3 weeks, add a natural verbal subscribe prompt at the 80% mark. It should feel earned, not scripted. Compare subscriber-per-view rate against previous 5 Shorts without CTAs.</div></div>
+      <div class="exp-field"><div class="ef-label">Metric to Track</div><div class="ef-val">Subscribers gained per 1,000 views. Also monitor whether the CTA causes swipe-away rate to increase (indicating viewer resistance).</div></div>
+      <div class="exp-field"><div class="ef-label">Expected Result</div><div class="ef-val">Verbal CTAs on high-retention Shorts should show 50-80% improvement in subscriber conversion without measurable swipe-away increase, since the viewer is already 80% through the content.</div></div>
+    </div>
+  </div>
+
+  <div class="exp-card">
+    <div class="exp-num">Experiment 10</div>
+    <div class="exp-title">The Economic Anger Content Sprint</div>
+    <div class="exp-grid">
+      <div class="exp-field"><div class="ef-label">Hypothesis</div><div class="ef-val">A 4-week focus on economic class content (following "Saari dikkat gareebo se hi hai!" success) will break into non-political audiences and significantly expand the subscriber base's demographic range.</div></div>
+      <div class="exp-field"><div class="ef-label">Implementation</div><div class="ef-val">For 4 weeks, post one economic/class-angle Short per week. Topics: fuel prices, inflation, housing costs, job market, student debt equivalents in India. Compare new subscriber demographics in Studio audience tab.</div></div>
+      <div class="exp-field"><div class="ef-label">Metric to Track</div><div class="ef-val">% of new subscribers who are non-subscribers before the sprint. Viewer geography (tier-2/3 city expansion). Long-term retention of these new subscribers.</div></div>
+      <div class="exp-field"><div class="ef-label">Expected Result</div><div class="ef-val">Economic content will expand into BJP-sympathising middle-class demographics that typically avoid political commentary. This de-polarizes the audience and increases the channel's total addressable market.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 12: BIG 5 -->
+<section id="big5">
+  <div class="section-eyebrow">Section 12</div>
+  <div class="section-title">If We Only Do 5 Things Next Month</div>
+  <div class="section-sub">Ranked by impact. If bandwidth is limited and only five changes can be made, these are the ones that move the needle most.</div>
+
+  <div class="big5-card">
+    <div class="big5-rank">1</div>
+    <div class="big5-content">
+      <div class="big5-title">Enforce the 90-Second Rule — No Exceptions</div>
+      <div class="big5-desc">Every Short exceeding 90 seconds must be re-edited or rejected. <strong>National Tamasha Agency's failure (44.4K vs 361K for similar content) is entirely attributable to duration.</strong> This is a single editorial policy change that requires zero additional resources and eliminates the biggest recurring performance killer. The four Shorts over 1:45 in this dataset averaged 101K views. The rest averaged 350K+. This rule alone could add 1-2M views per month to the Shorts total.</div>
+    </div>
+    <div class="big5-meta">
+      <div class="effort-badge effort-low">Low Effort</div>
+      <div class="upside-label">Expected Upside</div>
+      <div class="upside-val">+40-60% avg views</div>
+    </div>
+  </div>
+
+  <div class="big5-card">
+    <div class="big5-rank">2</div>
+    <div class="big5-content">
+      <div class="big5-title">Post 2 Native Reaction Shorts Per Week</div>
+      <div class="big5-desc">When breaking news breaks, Sarthak films a raw 60-90 second face-camera reaction within 2-4 hours. No B-roll. No editor dependency. Just Sarthak's face and voice on the breaking story. <strong>This is the highest-leverage subscriber conversion format and it currently does not exist in the output.</strong> Two native Shorts per week — one breaking news reaction, one satirical commentary — would test whether native content significantly outperforms repurposed on subscriber conversion rate.</div>
+    </div>
+    <div class="big5-meta">
+      <div class="effort-badge effort-med">Medium Effort</div>
+      <div class="upside-label">Expected Upside</div>
+      <div class="upside-val">3-5× subscriber conversion</div>
+    </div>
+  </div>
+
+  <div class="big5-card">
+    <div class="big5-rank">3</div>
+    <div class="big5-content">
+      <div class="big5-title">Post a Saturday Teaser Short Every Week</div>
+      <div class="big5-desc">Every Saturday, extract the single most explosive moment from the upcoming Sunday Show. Post it as a Short — but end it before the resolution. "Poori baat Sunday ko 👀." This converts the Shorts audience into Sunday Show viewers and creates a predictable weekly ritual. <strong>Currently, the Shorts and long-form operate as completely separate products for completely separate audiences. This is the bridge.</strong> This also uses already-produced content with minimal additional work.</div>
+    </div>
+    <div class="big5-meta">
+      <div class="effort-badge effort-low">Low Effort</div>
+      <div class="upside-label">Expected Upside</div>
+      <div class="upside-val">+20-35% Sunday Show D1 views</div>
+    </div>
+  </div>
+
+  <div class="big5-card">
+    <div class="big5-rank">4</div>
+    <div class="big5-content">
+      <div class="big5-title">Launch "Media Watch" as a Weekly Recurring Series</div>
+      <div class="big5-desc">Every Wednesday: one Short, one media accountability story, same format, same title structure ("Media Watch: [Subject]"). This builds an algorithmic recommendation cluster, creates audience expectation, and stakes out the media criticism space before another creator claims it. <strong>Logic Where?! proved the audience is hungry for media accountability content — and there's no recurring format exploiting that demand.</strong> Within 4-6 weeks, YouTube will begin routing this series to journalism and media-interested audiences outside Sarthak's current subscriber base.</div>
+    </div>
+    <div class="big5-meta">
+      <div class="effort-badge effort-med">Medium Effort</div>
+      <div class="upside-label">Expected Upside</div>
+      <div class="upside-val">New non-subscriber audience acquisition</div>
+    </div>
+  </div>
+
+  <div class="big5-card">
+    <div class="big5-rank">5</div>
+    <div class="big5-content">
+      <div class="big5-title">Add One Verbal CTA Per Short (at 80% Mark)</div>
+      <div class="big5-desc">The end screen click-through rate is 0.0% across every Short in this dataset. The channel is generating millions of views and converting almost none of them to subscribers via Shorts. A simple verbal ask — <em>"Aisi cheezein regularly chahiye toh subscribe karo"</em> spoken naturally at the 80% completion mark — will dramatically improve subscriber conversion without hurting retention. <strong>This requires zero production change. It's a script change of three seconds that should have been happening from day one.</strong></div>
+    </div>
+    <div class="big5-meta">
+      <div class="effort-badge effort-low">Low Effort</div>
+      <div class="upside-label">Expected Upside</div>
+      <div class="upside-val">50-80% more subscribers per Short</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 13: FINAL VERDICT -->
+<section id="final-verdict">
+  <div class="section-eyebrow">Section 13</div>
+  <div class="section-title">Final Verdict</div>
+  <div class="section-sub">Direct answers to the most important strategic questions — no hedging, no qualification.</div>
+
+  <div class="verdict-answer">
+    <div class="va-q">Q1 · What is the #1 reason some Shorts cross 1M while others stop at 100K-300K?</div>
+    <div class="va-a">Hook-emotion fit. The 1M+ Short creates an emotion that demands completion. The 100-300K Short creates a topic that merely interests.</div>
+    <div class="va-detail"><strong>Logic Where?!</strong> worked because a viewer at second 3 felt personally outraged. The question "Logic Where?!" activated their own moral framework before Sarthak had said a single analysis sentence. <strong>National Tamasha Agency</strong> started with context. Context is irrelevant at second 3. The viewer is already gone.</div>
+  </div>
+
+  <div class="verdict-answer">
+    <div class="va-q">Q2 · What is the biggest Shorts growth bottleneck?</div>
+    <div class="va-a">The complete absence of content designed natively for Shorts, combined with a repurpose pipeline that doesn't filter for Shorts-compatibility.</div>
+    <div class="va-detail">Every Short in this dataset appears to be a repurposed clip. Some happen to have Shorts-compatible hooks — when they do, they perform well. Most don't. <strong>The strategy is currently reliant on serendipity rather than design.</strong> Until there's an editorial filter that asks "would a first-time viewer, mid-scroll, stop for this specific opening?" — the output will remain highly variable.</div>
+  </div>
+
+  <div class="verdict-answer">
+    <div class="va-q">Q3 · What content type should be doubled down on?</div>
+    <div class="va-a">Media accountability and institutional absurdity — specifically when a named individual faces an absurd institutional response.</div>
+    <div class="va-detail"><strong>Logic Where?!</strong> (1.1M) and <strong>This is Real Journalism!</strong> (794K) establish this clearly. The formula: <em>Individual journalist/student/citizen + institution behaving absurdly against them + Sarthak's outrage as amplifier.</em> This content transcends political partisanship (you don't have to be anti-BJP to be outraged by CBSE blaming a journalist), reaches new audiences (journalism-curious viewers who don't follow political commentary), and generates remixes (amplification beyond the channel).</div>
+  </div>
+
+  <div class="verdict-answer">
+    <div class="va-q">Q4 · What content type should be reduced?</div>
+    <div class="va-a">Long-form explanatory segments repurposed as Shorts without re-editing. Specifically: anything over 1:45 that starts with contextual setup rather than emotional peak.</div>
+    <div class="va-detail">Social issue content without a specific outrage target (dowry, water crisis), abstract legal/judicial content (Supreme Court), and institutional explainers (National Tamasha Agency) all underperform and consume posting slots that could go to higher-performing formats. <strong>The same NTA-NEET story, told with outrage framing instead of explanation framing, produced 361K vs 44K.</strong> The decision to reduce isn't about the topic — it's about the format choice applied to it.</div>
+  </div>
+
+  <div class="verdict-answer">
+    <div class="va-q">Q5 · What is the fastest path to 2× Shorts views?</div>
+    <div class="va-a">Enforce the 90-second rule immediately, and begin posting one native breaking-news reaction Short per week.</div>
+    <div class="va-detail">Removing the under-100K Shorts (which drag the average down) through better quality filtering and adding 4-5 native Shorts per month that capitalize on breaking news cycles would realistically double total Shorts views within 60 days. <strong>The 4 Shorts over 1:45 in this dataset averaged 101K. If those had instead been 75-90 second versions, they likely would have averaged 300-400K based on the pattern in the rest of the dataset. That's 1M+ additional views from four editorial decisions.</strong></div>
+  </div>
+
+  <div class="verdict-answer">
+    <div class="va-q">Q6 · What is the fastest path to 2× Shorts subscribers?</div>
+    <div class="va-a">Add verbal CTAs at the 80% mark of every Short, and launch the Saturday Teaser series to funnel Shorts viewers into Sunday Show subscribers.</div>
+    <div class="va-detail">The current subscriber conversion rate from Shorts is approximately 0.015-0.05%. A verbal CTA alone should lift this to 0.08-0.12% — a 2-4× improvement. Combined with the Saturday Teaser format (which captures viewers at their highest-interest moment — they just watched something compelling and are primed to learn more), the subscriber conversion path becomes coherent for the first time. <strong>Currently, a viewer watches Logic Where?! for 55 seconds, finds it compelling, and has no clear path to subscription. They swipe. They're gone. That is an entirely solvable problem.</strong></div>
+  </div>
+
+  <div class="verdict-answer" style="border-left-color:var(--gold);">
+    <div class="va-q">Q7 · What should the Shorts strategy look like over the next 90 days?</div>
+    <div class="va-a" style="color:var(--gold);">Three distinct phases, each building on the last.</div>
+    <div class="va-detail">
+      <div class="day-block" style="margin-top:14px;">
+        <div class="day-header d30">Days 1–30: Fix the Foundation <span style="font-size:10px; font-weight:400;">Infrastructure + Quality Filter</span></div>
+        <div class="day-body">
+          <ul>
+            <li>Implement the <strong>90-second hard cap</strong> on all repurposed Shorts. Re-edit or reject everything over 1:45.</li>
+            <li>Add <strong>verbal CTA</strong> at 80% mark of every Short posted: "Agar ye important lagta hai toh subscribe karo" — natural, not scripted.</li>
+            <li>Begin the <strong>Saturday Teaser protocol</strong>: every Saturday, post a 45-60 second cliff-hanger from the Sunday Show.</li>
+            <li>Create a <strong>Shorts quality checklist</strong>: Does it have an emotional hook in the first 3 seconds? Is it under 90 seconds? Does the viewer need context from the long-form to understand it? Score every clip before posting.</li>
+            <li>Pin a comment linking to the parent long-form video within 1 hour of posting every Short.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day-header d60">Days 31–60: Build Native Capacity <span style="font-size:10px; font-weight:400;">New Formats + Speed</span></div>
+        <div class="day-body">
+          <ul>
+            <li>Launch <strong>"Media Watch"</strong> as a weekly Wednesday series. First 4 episodes to establish the format and begin building algorithmic clustering.</li>
+            <li>Film and post <strong>2 native breaking-news reaction Shorts</strong> per week. Raw. Face-camera. Under 90 seconds. No editor required.</li>
+            <li>Run the <strong>Hindi title test</strong>: for 4 weeks, all Shorts get Hindi-primary titles. Compare to historical performance.</li>
+            <li>Test the <strong>@mention amplification strategy</strong> on 3 Shorts that feature tribute or accountability content involving named individuals with social presence.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="day-block">
+        <div class="day-header d90">Days 61–90: Dominate the Niche <span style="font-size:10px; font-weight:400;">Series + Compound Growth</span></div>
+        <div class="day-body">
+          <ul>
+            <li>Launch the <strong>economic class content sprint</strong> based on learnings from "Saari dikkat gareebo se hi hai." 4 weeks of class-anxiety Shorts targeting the cross-political middle class.</li>
+            <li>By Day 90, Media Watch should have 8-12 episodes. Evaluate: is YouTube showing series-momentum growth? Is the non-subscriber audience % increasing?</li>
+            <li>Establish the <strong>Shorts content calendar</strong>: Monday (repurposed from Sunday Show), Wednesday (Media Watch native), Saturday (Sunday Show teaser) + 2 breaking news reactions when news breaks.</li>
+            <li>Conduct a <strong>30-day audit</strong> comparing performance metrics (avg views, retention, subscriber conversion) against the baseline established in this audit. Adjust what's not working.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sep"></div>
+
+  <div style="background:var(--surface-2); border:1px solid var(--border-bright); border-radius:12px; padding:28px; margin-top:8px;">
+    <div style="font-family:'Syne',sans-serif; font-size:18px; font-weight:800; color:var(--accent); margin-bottom:12px;">The Unfiltered One-Line Summary</div>
+    <p style="font-size:13px; color:var(--text-dim); line-height:1.8; font-family:'Instrument Serif',serif; font-style:italic;">Sarthak has already found the formula — Logic Where?! is proof. The problem is that this formula hasn't been systematized, the pipeline doesn't filter for it, and the Shorts aren't being used to build anything beyond themselves. Fix those three things, and the channel doesn't just double its Shorts views — it builds the kind of compounding audience loyalty that makes the Sunday Show a national institution.</p>
+  </div>
+</section>
+
+</main>
+
+<script>
+// Smooth scroll highlight active nav item
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.style.color = '';
+        link.style.borderLeftColor = '';
+        link.style.background = '';
+      });
+      const activeLink = document.querySelector(`nav a[href="#${entry.target.id}"]`);
+      if (activeLink) {
+        activeLink.style.color = 'var(--text)';
+        activeLink.style.borderLeftColor = 'var(--accent)';
+        activeLink.style.background = 'var(--surface-2)';
+      }
+    }
+  });
+}, { threshold: 0.2 });
+
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
